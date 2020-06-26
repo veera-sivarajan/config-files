@@ -1,8 +1,10 @@
 #!/bin/bash
+# command to check weather
 function weather() {
     curl wttr.in/$1
 }
 
+# various aliases to quickly access important directory
 alias 187='cd /home/veera/Classes/Spring20/COMPSCI187/Projects'
 alias class='cd /home/veera/Classes/Summer20'
 alias 250='cd /home/veera/Classes/Summer20/COMPSCI250'
@@ -56,4 +58,5 @@ function gac() {
   git commit -m "$1"
 }
 
+# alias for adding dotfiles to git
 alias dfiles='/usr/bin/git --git-dir=$HOME/.Files/ --work-tree=$HOME'
