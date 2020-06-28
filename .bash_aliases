@@ -1,6 +1,6 @@
 #!/bin/bash
 # command to check weather
-function weather() {
+function w() {
     curl wttr.in/$1
 }
 
@@ -11,7 +11,7 @@ alias 250='cd /home/veera/Classes/Summer20/COMPSCI250'
 alias proj='cd /home/veera/Projects'
 
 # create directory and cd into it
-function mkodir() {  
+function modr() {  
     mkdir $1
     cd $1
 }
