@@ -9,6 +9,7 @@ alias 187='cd /home/veera/Classes/Spring20/COMPSCI187/Projects'
 alias class='cd /home/veera/Classes/Summer20'
 alias 250='cd /home/veera/Classes/Summer20/COMPSCI250'
 alias proj='cd /home/veera/Projects'
+alias test='cd /home/veera/Projects/Test'
 
 # create directory and cd into it
 function modr() {  
