@@ -61,3 +61,8 @@ function gac() {
 
 # alias for adding dotfiles to git
 alias dfiles='/usr/bin/git --git-dir=$HOME/.Files/ --work-tree=$HOME'
+
+# alias for running python programs quickly
+function p() {
+  python3 "$1"
+}
