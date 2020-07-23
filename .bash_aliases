@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # command to check weather
 function w() {
     curl wttr.in/$1
@@ -9,7 +10,7 @@ alias 187='cd /home/veera/Classes/Spring20/COMPSCI187/Projects'
 alias class='cd /home/veera/Classes/Summer20'
 alias 250='cd /home/veera/Classes/Summer20/COMPSCI250'
 alias proj='cd /home/veera/Projects'
-alias test='cd /home/veera/Projects/Test'
+alias t='cd /home/veera/Projects/Test' # alias to go straight into test dir
 
 # create directory and cd into it
 function modr() {  
@@ -62,7 +63,7 @@ function gac() {
 # alias for adding dotfiles to git
 alias dfiles='/usr/bin/git --git-dir=$HOME/.Files/ --work-tree=$HOME'
 
-# alias for running python programs quickly
+# alias for running python3 programs quickly
 function p() {
   python3 "$1"
 }
