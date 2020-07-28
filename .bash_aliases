@@ -48,8 +48,8 @@ function vtags() {
   java -jar ~/Projects/vtags.jar $path/$1   
 }
 
-# execute jrun
-function jrun() {
+# compile and run java source code 
+function j() {
   javac $1.java
   java $1
 }
