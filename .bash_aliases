@@ -9,7 +9,7 @@ function w() {
 alias 187='cd /home/veera/Classes/Spring20/COMPSCI187/Projects'
 alias cl='cd /home/veera/Classes/Summer20'
 alias 250='cd /home/veera/Classes/Summer20/COMPSCI250'
-alias pr='cd /home/veera/Projects'
+alias proj='cd /home/veera/Projects'
 alias t='cd /home/veera/Projects/Test' # alias to go straight into test dir
 
 # create directory and cd into it
