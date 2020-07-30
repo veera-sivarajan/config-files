@@ -67,3 +67,11 @@ alias dfiles='/usr/bin/git --git-dir=$HOME/.Files/ --work-tree=$HOME'
 function p() {
   python3 "$1"
 }
+# short command to add and commit all dot files
+function dfg() {
+  dfiles add .bash_aliases
+  dfiles add .bashrc
+  dfiles add .vimrc
+  dfiles commit -m "$1"
+  difles push -u origin master
+}
