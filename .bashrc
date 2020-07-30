@@ -114,5 +114,16 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-# add date and time to bash history
+
+# record timestamps
 HISTTIMEFORMAT="%d/%m/%y %T "
+
+# allow a larger history file
+HISTFILESIZE=1000000
+HISTSIZE=1000000
+
+# prevent commnads starting with a space from going into history
+HISTCONTROL=ignoreboth
+
+# store history immediately
+PROMPT_COMMAND='history -a'
