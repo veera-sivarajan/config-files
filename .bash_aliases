@@ -73,5 +73,5 @@ function dfg() {
   dfiles add .bashrc
   dfiles add .vimrc
   dfiles commit -m "$1"
-  difles push -u origin master
+  dfiles push -u origin master
 }
