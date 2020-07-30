@@ -114,3 +114,5 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+# add date and time to bash history
+HISTTIMEFORMAT="%d/%m/%y %T "
