@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # command to check weather
-function w() {
+function wtr() {
     curl wttr.in/$1
 }
 
