@@ -11,6 +11,7 @@ alias cl='cd /home/veera/Classes/Summer20'
 alias 250='cd /home/veera/Classes/Summer20/COMPSCI250'
 alias proj='cd /home/veera/Projects'
 alias t='cd /home/veera/Projects/Test' # alias to go straight into test dir
+alias emacs='emacs &' # always open emacs in the background
 
 # create directory and cd into it
 function modr() {  
