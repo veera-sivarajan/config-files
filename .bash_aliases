@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# load thirukural script to shell
+source ~/Projects/.ThirukkuralAPI/src/script.sh
+
 # command to check weather
 function wtr() {
     curl wttr.in/$1
@@ -11,7 +14,7 @@ alias cl='cd /home/veera/Classes/Summer20'
 alias 250='cd /home/veera/Classes/Summer20/COMPSCI250'
 alias proj='cd /home/veera/Projects'
 alias t='cd /home/veera/Projects/Test' # alias to go straight into test dir
-alias emacs='emacs &' # always open emacs in the background
+#alias emacs='emacs &' # always open emacs in the background
 
 # create directory and cd into it
 function modr() {  
@@ -64,10 +67,11 @@ function gac() {
 # alias for adding dotfiles to git
 alias dfiles='/usr/bin/git --git-dir=$HOME/.Files/ --work-tree=$HOME'
 
-# alias for running python3 programs quickly
+# shortened command for executing python3 programs quickly
 function p() {
   python3 "$1"
 }
+
 # short command to add and commit all dot files
 function dfg() {
   dfiles add .bash_aliases
@@ -76,3 +80,4 @@ function dfg() {
   dfiles commit -m "$1"
   dfiles push -u origin master
 }
+
