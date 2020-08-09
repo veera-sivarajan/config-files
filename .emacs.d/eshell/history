@@ -1,0 +1,9 @@
+ls
+cd ../..
+ls
+cd Classes/
+ls
+cd
+cd Projects/LispCalc/src
+ls
+vim repl.py 

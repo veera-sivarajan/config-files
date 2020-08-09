@@ -77,6 +77,7 @@ function dfg() {
   dfiles add .bash_aliases
   dfiles add .bashrc
   dfiles add .vimrc
+  dfiles add .emacs.d
   dfiles commit -m "$1"
   dfiles push -u origin master
 }
