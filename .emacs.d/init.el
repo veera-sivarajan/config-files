@@ -13,7 +13,7 @@
 ;; end (4)
 ;; Evil Mode (5)
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "https://mebblpa.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 (require 'evil)
 (evil-mode 1)
@@ -30,7 +30,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (org-bullets magit zenburn-theme vterm-toggle spacemacs-theme solarized-theme nimbus-theme multi-term haskell-mode evil dracula-theme doom-modeline))))
+    (ox-twbs org-bullets magit zenburn-theme vterm-toggle spacemacs-theme solarized-theme nimbus-theme multi-term haskell-mode evil dracula-theme doom-modeline))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -55,3 +55,16 @@
 (add-hook 'org-mode-hook (lambda ()
 			   (linum-mode 0)))
 ;; end (10)
+;; ox-twbs setup (11)
+(add-to-list 'load-path "/home/veera/.emacs.d/ox-twbs")
+(require 'ox-twbs)
+;; end (11)
+;; key binding for opening multi-term quickly (12)
+(defun openterminal ()
+  (interactive)
+  (split-window-sensibly)
+  (other-window 1)
+  (multi-term))
+(global-set-key (kbd "C-q")
+		#'openterminal)
+;; end (12)
