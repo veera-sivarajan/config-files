@@ -4,9 +4,10 @@
 ;; Haskell Mode (2)
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 ;; end (2)
-;; disable menu bar and tool bar (3)
-(menu-bar-mode 0)
-(tool-bar-mode 0)
+;; disable menu bar, tool bar and scroll bar (3)
+(menu-bar-mode -1) ;; menu bar
+(tool-bar-mode -1) ;; tool bar
+(toggle-scroll-bar -1) ;; scroll bar
 ;; end (3)
 ;; set font to Ubuntu Mono with size = 16 (4)
 (set-default-font "Ubuntu Mono-16")
@@ -30,7 +31,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (ox-twbs org-bullets magit zenburn-theme vterm-toggle spacemacs-theme solarized-theme nimbus-theme multi-term haskell-mode evil dracula-theme doom-modeline))))
+    (vimish-fold ox-twbs org-bullets magit zenburn-theme vterm-toggle spacemacs-theme solarized-theme nimbus-theme multi-term haskell-mode evil dracula-theme doom-modeline))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -68,3 +69,7 @@
 (global-set-key (kbd "C-q")
 		#'openterminal)
 ;; end (12)
+;; key bindings for vimish fold (13)
+(global-set-key (kbd "<f6>") #'vimish-fold)
+(global-set-key (kbd "<f7>") #'vimish-fold-delete)
+;; end (13)
