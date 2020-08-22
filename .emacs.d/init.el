@@ -132,3 +132,4 @@
 ;; display column number all the time (19)
 (setq column-number-mode t)
 ;; end (19)
+;; test egac script
