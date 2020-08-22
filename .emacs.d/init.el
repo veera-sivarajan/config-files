@@ -29,6 +29,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(haskell-process-show-debug-tips nil)
  '(package-selected-packages
    (quote
     (vimish-fold ox-twbs org-bullets magit zenburn-theme vterm-toggle spacemacs-theme solarized-theme nimbus-theme multi-term haskell-mode evil dracula-theme doom-modeline))))
@@ -82,3 +83,52 @@
 (add-hook 'haskell-mode-hook (lambda ()
 			       (local-set-key (kbd "C-;") 'haskell-mode-save-load-buffer)))
 ;; end (14)
+;; Scheme setup (15)
+;(load-library "xscheme")
+;;(require 'xscheme)
+;;; Always do syntax highlighting
+(global-font-lock-mode 1)
+
+;;; Also highlight parens
+(setq show-paren-delay 0
+      show-paren-style 'parenthesis)
+(show-paren-mode 1)
+
+;;; This is the binary name of my scheme implementation
+(setq scheme-program-name "xscheme")
+;; end (15)
+;; mode line colors (16) Not sure how it works. Google and then implement
+(set-face-background 'mode-line "black")
+(set-face-foreground 'mode-line "white")
+(set-face-foreground 'region "black")
+(set-face-background 'region "white") 
+;; end (16)
+;; Fix for Haskell-evil bug on pressing 'o' (17)
+(defun evil-open-below (count)
+    "Insert a new line below point and switch to Insert state.
+    The insertion will be repeated COUNT times."
+    (interactive "p")
+    (evil-insert-newline-below)
+    (setq evil-insert-count count
+            evil-insert-lines t
+            evil-insert-vcount nil)
+    (evil-insert-state 1)
+    (add-hook 'post-command-hook #'evil-maybe-remove-spaces)
+    )
+;; end (17)
+;; Fix for Haskell-evil bug on pressing 'O' (18)
+(defun evil-open-above (count)
+    "Insert a new line above point and switch to Insert state.
+    The insertion will be repeated COUNT times."
+    (interactive "p")
+    (evil-insert-newline-above)
+    (setq evil-insert-count count
+            evil-insert-lines t
+            evil-insert-vcount nil)
+    (evil-insert-state 1)
+    (add-hook 'post-command-hook #'evil-maybe-remove-spaces)
+    )
+;; end (18)
+;; display column number all the time (19)
+(setq column-number-mode t)
+;; end (19)
