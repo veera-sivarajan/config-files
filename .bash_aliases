@@ -14,7 +14,7 @@ alias cl='cd /home/veera/Classes/Summer20'
 alias 250='cd /home/veera/Classes/Summer20/COMPSCI250'
 alias proj='cd /home/veera/Projects'
 alias t='cd /home/veera/Projects/Test' # alias to go straight into test dir
-#alias emacs='emacs &' # always open emacs in the background
+alias e='exit' # alias to quickly exit terminal
 
 # create directory and cd into it
 function modr() {  
@@ -77,8 +77,15 @@ function dfg() {
   dfiles add .bash_aliases
   dfiles add .bashrc
   dfiles add .vimrc
-  #dfiles add .emacs.d/init.el
   dfiles commit -m "$1"
   dfiles push -u origin master
 }
 
+# git and commit Emacs init file
+function egac() {
+    cd ~/.emacs.d
+    dfiles add init.el
+    dfiles commit -m "$1"
+    dfiles push -u origin master
+    cd
+}
