@@ -13,6 +13,7 @@
 (set-default-font "Ubuntu Mono-16")
 ;; end (4)
 ;; Evil Mode (5)
+(setq evil-mode-line-format nil) ;; disable evil-mode state indicator
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
@@ -29,6 +30,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(evil-echo-state t)
  '(haskell-process-show-debug-tips nil)
  '(package-selected-packages
    (quote
@@ -184,3 +186,14 @@
       minions-mode-line-delimiters '("" . ""))
 (minions-mode 1)
 ;; end (26)
+;; tramp setup (27)
+(require 'tramp)
+(setq tramp-default-method "ssh")
+;; end (27)
+;; quickly access edlab server files (28)
+(defun open-edlab ()
+  "Opening edlab"
+  (interactive)
+  (find-file "/-:vsivarajan@elnux.cs.umass.edu:"))
+(global-set-key (kbd "C-c w") 'open-edlab)
+;; end (28)
