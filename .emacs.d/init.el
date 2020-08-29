@@ -1,8 +1,11 @@
-;; display line numbers (1)
+;; display line numbers and set color to line numbers (1)
 (add-hook 'prog-mode-hook 'linum-mode)
+(set-face-foreground 'linum "yellow")
 ;; end (1)
 ;; Haskell Mode (2)
-(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+(add-hook 'haskell-mode-hook (lambda ()
+			       (interactive-haskell-mode)
+			       (haskell-doc-mode)))
 ;; end (2)
 ;; disable menu bar, tool bar and scroll bar (3)
 (menu-bar-mode -1) ;; menu bar
@@ -34,7 +37,7 @@
  '(haskell-process-show-debug-tips nil)
  '(package-selected-packages
    (quote
-    (minions use-package moody vimish-fold ox-twbs org-bullets magit zenburn-theme vterm-toggle spacemacs-theme solarized-theme nimbus-theme multi-term haskell-mode evil dracula-theme doom-modeline))))
+    (auctex minions use-package moody vimish-fold ox-twbs org-bullets magit zenburn-theme vterm-toggle spacemacs-theme solarized-theme nimbus-theme multi-term haskell-mode evil dracula-theme doom-modeline))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -173,7 +176,6 @@
 (global-set-key (kbd "C-x 3") 'split-right-and-switch)
 ;; end (24)
 ;; prettify mode line using moody (25)
-;; end (25)
 (use-package moody
   :ensure t
   :config
@@ -181,6 +183,7 @@
         moody-mode-line-height 30)
   (moody-replace-mode-line-buffer-identification)
   (moody-replace-vc-mode))
+;; end (25)
 ;; hide minor modes (26)
 (setq minions-mode-line-lighter ""
       minions-mode-line-delimiters '("" . ""))
@@ -197,3 +200,48 @@
   (find-file "/-:vsivarajan@elnux.cs.umass.edu:"))
 (global-set-key (kbd "C-c w") 'open-edlab)
 ;; end (28)
+;; number of tabs for C and C++ programming and braces in new line (29)
+(setq c-default-style "linux"
+      c-basic-offset 4)
+;; end (29)
+;; add my credentials (30)
+(setq user-full-name "Veera Sivarajan"
+      user-mail-address "sveera.2001@gmail.com")
+;; end (30)
+;; custom frame title (31)
+(setq frame-title-format '((:eval (projectile-project-name))))
+;; end (31)
+;; auto save on current file (32)
+(auto-save-visited-mode 1)
+;; end (32)
+;; enable ido-mode for quick buffer switch (33)
+(ido-mode 1)
+;; end (33)
+;; switch windows and go to evil normal state. (34)
+;; My first elisp function written on my own - August 29
+(defun switch-window-down-evil-normal()
+  (interactive)
+  (evil-normal-state)
+  (evil-window-down 1))
+
+(defun switch-window-up-evil-normal()
+  (interactive)
+  (evil-normal-state)
+  (evil-window-up 1))
+
+(defun switch-window-right-evil-normal()
+  (interactive)
+  (evil-normal-state)
+  (evil-window-right 1))
+
+(defun switch-window-left-evil-normal()
+  (interactive)
+  (evil-normal-state)
+  (evil-window-left 1))
+
+(global-set-key (kbd "C-; j") 'switch-window-down-evil-normal)
+(global-set-key (kbd "C-; k") 'switch-window-up-evil-normal)
+(global-set-key (kbd "C-; l") 'switch-window-right-evil-normal)
+(global-set-key (kbd "C-; h") 'switch-window-left-evil-normal)
+;; end (34)
+
