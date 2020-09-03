@@ -96,10 +96,21 @@ export PATH="$HOME/gems/bin:$PATH"
 
 # function to send files from local to edlab
 function sendfile() {
-    scp $1 vsivarajan@elnux.cs.umass.edu:$2
+    scp -r $1 vsivarajan@elnux.cs.umass.edu:$2
 }
 
 # function to receive files from edlab
 function getfile() {
-    scp vsivarajan@elnux.cs.umass.edu:$1 /home/veera/$2
+    scp -r vsivarajan@elnux.cs.umass.edu:$1 /home/veera/$2
+}
+
+# quickly ssh into edlab
+function edlab() {
+    ssh vsivarajan@elnux.cs.umass.edu
+}
+
+# quickly compile and execute C programs
+function crun() {
+    gcc $1
+    ./a.out
 }
