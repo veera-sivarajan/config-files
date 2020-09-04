@@ -275,3 +275,26 @@
 (add-hook 'haskell-interactive-mode-hook (lambda ()
 			       (local-set-key (kbd "C-'") 'back-to-file)))
 ;; end (39)
+;; custom color for org TODO face (40)
+(setq org-todo-keyword-faces
+      '(("TODO" . "IndianRed1") ("DONE" . "SpringGreen1")))
+;; end (40)
+;; colorize eshell prompt and display only the last directory (41)
+(setq eshell-prompt-function (lambda nil
+			       (concat
+				(propertize (car (last (split-string (eshell/pwd) "/"))) 'face `(:foreground "green"))
+				"$ ")))
+(setq eshell-highlight-prompt nil)
+;; end (41)
+;; modify eshell prompt regexp (42)
+(setq eshell-prompt-regexp "^[^#$\n]*[#$] ")
+;; end (42)
+;; open eshell when opening emacs (43)
+(add-hook 'emacs-startup-hook
+	  (lambda ()
+	    (cd default-directory)
+	    (eshell)))
+;; end (43)
+;; inhibit GNU Emacs buffer on startup (44)
+(setq inhibit-startup-message t)
+;; end (44)
