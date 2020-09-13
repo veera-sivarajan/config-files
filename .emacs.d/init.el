@@ -35,7 +35,7 @@
  '(haskell-process-show-debug-tips nil)
  '(package-selected-packages
    (quote
-    (latex-preview-pane auctex-latexmk auctex minions use-package moody vimish-fold ox-twbs org-bullets magit zenburn-theme vterm-toggle spacemacs-theme solarized-theme nimbus-theme multi-term haskell-mode evil dracula-theme doom-modeline))))
+    (zoom latex-preview-pane auctex-latexmk auctex minions use-package moody vimish-fold ox-twbs org-bullets magit zenburn-theme vterm-toggle spacemacs-theme solarized-theme nimbus-theme multi-term haskell-mode evil dracula-theme doom-modeline))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -72,7 +72,7 @@
   (interactive)
   (split-window-sensibly)
   (other-window 1)
-  (multi-term))
+  (eshell))
 (global-set-key (kbd "C-q")
 		#'openterminal)
 ;; end (12)
@@ -312,6 +312,10 @@
 ;; bind key to clear screen in eshell (46)
 (bind-keys*
  ("C-l" . (lambda ()
-		      (interactive)
-		      (run-in-eshell "clear 1"))))
+	    (interactive)
+	    (run-in-eshell "clear 1"))))
 ;; end (46)
+;; dired hide details mode global set (47)
+(add-hook 'dired-mode-hook
+	  (lambda () (dired-hide-details-mode +1)))
+;; end (47)
