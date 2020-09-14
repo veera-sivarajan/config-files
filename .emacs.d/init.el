@@ -35,7 +35,9 @@
  '(haskell-process-show-debug-tips nil)
  '(package-selected-packages
    (quote
-    (zoom latex-preview-pane auctex-latexmk auctex minions use-package moody vimish-fold ox-twbs org-bullets magit zenburn-theme vterm-toggle spacemacs-theme solarized-theme nimbus-theme multi-term haskell-mode evil dracula-theme doom-modeline))))
+    (geiser zoom latex-preview-pane auctex-latexmk auctex minions use-package moody vimish-fold ox-twbs org-bullets magit zenburn-theme vterm-toggle spacemacs-theme solarized-theme nimbus-theme multi-term haskell-mode evil dracula-theme doom-modeline)))
+ '(zoom-mode t nil (zoom))
+ '(zoom-size (quote (0 . 1))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -91,8 +93,6 @@
 			       (local-set-key (kbd "C-;") 'haskell-mode-save-load-buffer)))
 ;; end (14)
 ;; Scheme setup (15)
-;(load-library "xscheme")
-;;(require 'xscheme)
 ;;; Always do syntax highlighting
 (global-font-lock-mode 1)
 
@@ -319,3 +319,18 @@
 (add-hook 'dired-mode-hook
 	  (lambda () (dired-hide-details-mode +1)))
 ;; end (47)
+;; scheme config (48)
+(setq scheme-program-name "/usr/local/bin/mit-scheme")
+;; end (48)
+;; paredit config(49)
+(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
+(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode) 
+(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode) 
+(add-hook 'ielm-mode-hook             #'enable-paredit-mode) 
+(add-hook 'lisp-mode-hook             #'enable-paredit-mode) 
+(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode) 
+(add-hook 'scheme-mode-hook           #'enable-paredit-mode) 
+;; end (49)
+;; I don't like tabs (50)
+(setq-default indent-tabs-mode nil) 
+;; end (50)
