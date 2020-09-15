@@ -334,3 +334,12 @@
 ;; I don't like tabs (50)
 (setq-default indent-tabs-mode nil) 
 ;; end (50)
+;; go to window above from eshell (51)
+(defun eshell-to-above ()
+  (other-window)) 
+;; end (51)
+;; eshell mode hook for calling eshell-to-above (52)
+(add-hook 'eshell-mode-hook
+          (lambda ()
+            (define-key eshell-mode-map (kbd "C-; k") #'eshell-to-above))) 
+;; end (52)
