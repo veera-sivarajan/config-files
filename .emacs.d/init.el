@@ -335,11 +335,9 @@
 (setq-default indent-tabs-mode nil) 
 ;; end (50)
 ;; go to window above from eshell (51)
-(defun eshell-to-above ()
-  (other-window)) 
+;; Temporary solution as it not hooked to eshell-mode
+(bind-keys*
+ ("C-w k" . (lambda ()
+	    (interactive)
+	    (run-in-eshell "other-window 1")))) 
 ;; end (51)
-;; eshell mode hook for calling eshell-to-above (52)
-(add-hook 'eshell-mode-hook
-          (lambda ()
-            (define-key eshell-mode-map (kbd "C-; k") #'eshell-to-above))) 
-;; end (52)
