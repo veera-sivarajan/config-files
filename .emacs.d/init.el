@@ -1,5 +1,5 @@
 ;; display line numbers and set color to line numbers (1)
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(add-hook 'prog-mode-hook 'display-line-numbers-mode) 
 ;; end (0)
 ;; Haskell Mode (2)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
@@ -31,6 +31,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(display-line-numbers nil)
  '(evil-echo-state t)
  '(haskell-process-show-debug-tips nil)
  '(package-selected-packages
@@ -347,3 +348,9 @@
 (setq-default dired-omit-files-p t)  
 (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))  
 ;; end (52)
+;; remap :q to kill buffer instead of closing emacs (53)
+(evil-ex-define-cmd "q" 'kill-this-buffer) 
+;; end (53)
+;; map :quit to close emacs (54)
+(evil-ex-define-cmd "quit" 'save-buffers-kill-terminal) 
+;; end (54)
