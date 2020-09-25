@@ -349,7 +349,7 @@
 (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))  
 ;; end (52)
 ;; remap :q to kill buffer instead of closing emacs (53)
-(evil-ex-define-cmd "q" 'kill-this-buffer) 
+(evil-ex-define-cmd "q" 'delete-window) 
 ;; end (53)
 ;; map :quit to close emacs (54)
 (evil-ex-define-cmd "quit" 'save-buffers-kill-terminal) 
