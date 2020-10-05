@@ -25,31 +25,6 @@
 (require 'multi-term)
 (setq mutli-term-program "/bin/bash")
 ;; end (6)
-;; ABE for setting background to black (7)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(display-line-numbers nil)
- '(evil-echo-state t)
- '(haskell-process-show-debug-tips nil)
- '(package-selected-packages
-   (quote
-    (geiser zoom latex-preview-pane auctex-latexmk auctex minions use-package moody vimish-fold ox-twbs org-bullets magit zenburn-theme vterm-toggle spacemacs-theme solarized-theme nimbus-theme multi-term haskell-mode evil dracula-theme doom-modeline)))
- '(zoom-mode t nil (zoom))
- '(zoom-size (quote (0 . 1))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 158 :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
- '(line-number-current-line ((t (:inherit line-number :foreground "gold"))))
- '(mode-line ((t (:background "gray27"))))
- '(mode-line-inactive ((t (:background "gray17"))))
- '(org-ellipsis ((t (:foreground "gray100" :box nil :underline nil :slant italic :weight light :height 150 :width ultra-condensed)))))
-;; end (7)
 ;; automatically enable visual-line-mode and org-indent-mode (8)
 (with-eval-after-load 'org
   (setq org-startup-indented t) ;; enables `org-indent-mode` by default
@@ -183,11 +158,11 @@
   (setq x-underline-at-descent-line t
         moody-mode-line-height 30)
   (moody-replace-mode-line-buffer-identification)
-  (moody-replace-vc-mode))
+  (moody-replace-vc-mode)) 
 ;; end (25)
 ;; hide minor modes (26)
 (setq minions-mode-line-lighter ""
-      minions-mode-line-delimiters '("" . ""))
+      minions-mode-line-delimiters '("" . "")) 
 (minions-mode 1)
 ;; end (26)
 ;; tramp setup (27)
@@ -324,13 +299,6 @@
 (setq scheme-program-name "/usr/local/bin/mit-scheme")
 ;; end (48)
 ;; paredit config(49)
-(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
-(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode) 
-(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode) 
-(add-hook 'ielm-mode-hook             #'enable-paredit-mode) 
-(add-hook 'lisp-mode-hook             #'enable-paredit-mode) 
-(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode) 
-(add-hook 'scheme-mode-hook           #'enable-paredit-mode) 
 ;; end (49)
 ;; I don't like tabs (50)
 (setq-default indent-tabs-mode nil) 
@@ -354,3 +322,28 @@
 ;; map :quit to close emacs (54)
 (evil-ex-define-cmd "quit" 'save-buffers-kill-terminal) 
 ;; end (54)
+;; change comment region style from /* */ to // (55)
+(add-hook 'c-mode-hook (lambda () (setq comment-start "//"
+                                        comment-end   ""))) 
+;; end (55)
+;; keybinding for opening diary (56)
+(defun open-diary-file ()
+  (interactive)
+  (find-file "~/Diary.org")) 
+(global-set-key (kbd "C-c d") 'open-diary-file) 
+;; end (56) 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+'(default ((t (:inherit nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 158 :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
+ '(line-number-current-line ((t (:inherit line-number :foreground "gold"))))
+ '(mode-line ((t (:background "gray27"))))
+ '(mode-line-inactive ((t (:background "gray17"))))) 
