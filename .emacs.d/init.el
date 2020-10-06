@@ -78,7 +78,8 @@
 (show-paren-mode 1)
 
 ;;; This is the binary name of my scheme implementation
-(setq scheme-program-name "xscheme")
+;;(load-library "xscheme") 
+(setq scheme-program-name "xscheme") 
 ;; end (15)
 ;; mode line colors (16) Not sure how it works. Google and then implement
 ;;(set-face-background 'mode-line "black")
@@ -128,10 +129,11 @@
   (find-file "~/.emacs.d/init.el"))
 (global-set-key (kbd "C-c e") 'open-config-file)
 ;; end (22)
-;; disable evil-mode in terminal, haskell REPL and eshell (23)
+;; disable evil-mode in terminal, haskell REPL, eshell and mit-scheme REPL (23)
 (evil-set-initial-state 'term-mode 'emacs)
 (evil-set-initial-state 'haskell-interactive-mode 'emacs)
 (evil-set-initial-state 'eshell-mode 'emacs)
+(evil-set-initial-state 'inferior-scheme-mode 'emacs) 
 ;; end (23)
 ;; split window and switch cursor (24)
 (defun split-down-and-switch ()
@@ -296,7 +298,7 @@
 	  (lambda () (dired-hide-details-mode +1)))
 ;; end (47)
 ;; scheme config (48)
-(setq scheme-program-name "/usr/local/bin/mit-scheme")
+(setq scheme-program-name "/usr/local/bin/mit-scheme") 
 ;; end (48)
 ;; paredit config(49)
 ;; end (49)
