@@ -334,6 +334,7 @@
   (find-file "~/Diary.org")) 
 (global-set-key (kbd "C-c d") 'open-diary-file) 
 ;; end (56) 
+;; all faces config (57)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -348,4 +349,6 @@
 '(default ((t (:inherit nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 158 :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
  '(line-number-current-line ((t (:inherit line-number :foreground "gold"))))
  '(mode-line ((t (:background "gray27"))))
- '(mode-line-inactive ((t (:background "gray17"))))) 
+ '(mode-line-inactive ((t (:background "gray17")))) 
+ '(org-ellipsis ((t (:foreground "gray100" :box nil :underline nil :slant italic :weight light :height 150 :width ultra-condensed))))) 
+;; end (57)
