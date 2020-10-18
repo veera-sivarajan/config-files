@@ -261,7 +261,7 @@
 (setq eshell-prompt-function (lambda nil
 			       (concat
 				(propertize (car (last (split-string (eshell/pwd) "/"))) 'face `(:foreground "green"))
-				"$ ")))
+				"$ "))) 
 (setq eshell-highlight-prompt nil)
 ;; end (41)
 ;; modify eshell prompt regexp (42)
@@ -340,15 +340,22 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(display-line-numbers-width nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-'(default ((t (:inherit nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 158 :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
+ '(default ((t (:inherit nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 158 :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
  '(line-number-current-line ((t (:inherit line-number :foreground "gold"))))
  '(mode-line ((t (:background "gray27"))))
- '(mode-line-inactive ((t (:background "gray17")))) 
- '(org-ellipsis ((t (:foreground "gray100" :box nil :underline nil :slant italic :weight light :height 150 :width ultra-condensed))))) 
+ '(mode-line-inactive ((t (:background "gray17"))))
+ '(org-ellipsis ((t (:foreground "gray100" :box nil :underline nil :slant italic :weight light :height 150 :width ultra-condensed)))))
+ 
 ;; end (57)
+;; function to open file in top window (58)
+(defun open (file-name)
+  (interactive)
+  (split-down-and-switch)
+  (find-file-other-window file-name)) 
+;; end (58)
