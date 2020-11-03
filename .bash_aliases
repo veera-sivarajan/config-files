@@ -15,6 +15,8 @@ alias 250='cd /home/veera/Classes/Summer20/COMPSCI250'
 alias proj='cd /home/veera/Projects'
 alias t='cd /home/veera/Projects/Test' # alias to go straight into test dir
 alias e='exit' # alias to quickly exit terminal
+alias books='cd /home/veera/Books'
+alias lock='loginctl lock-session'
 
 # create directory and cd into it
 function modr() {  
@@ -42,9 +44,9 @@ function bye() {
 }
 
 # screen lock command for KDE5
-function lock() {
-  loginctl lock-session
-} 
+# function lock() {
+ # loginctl lock-session
+# } 
 
 # execute vtags from ~/Projects/ 
 function vtags() {

@@ -8,3 +8,4 @@ set autoindent
 set shellcmdflag=-ic
 syntax on
 set ruler
+set cindent
