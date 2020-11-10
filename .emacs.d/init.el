@@ -340,7 +340,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(display-line-numbers-width nil))
+ '(display-line-numbers-width nil)
+ '(package-selected-packages
+   (quote
+    (hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -373,3 +376,16 @@
   (c-indent-line-or-region)) 
 (evil-define-key 'normal c-mode-map (kbd "O") 'my-open-above-line)  
 ;; end (60)
+;; Macro to list all buffers and switch cursor to other window (61)
+(defun my-list-buffers-and-switch ()
+  (interactive)
+  (list-buffers)
+  (other-window 1)) 
+;; end (61)
+;; hl-todo config (62)
+(setq hl-todo-keyword-faces
+      '(("TODO"   . "#FFFF00")
+        ("FIXME"  . "#FF0000")
+        ("DEBUG"  . "#A020F0")
+        ("GOTCHA" . "#FF4500")
+        ("STUB"   . "#1E90FF"))) 
