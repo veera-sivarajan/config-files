@@ -343,7 +343,7 @@
  '(display-line-numbers-width nil)
  '(package-selected-packages
    (quote
-    (hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk))))
+    (pdf-tools hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -389,3 +389,6 @@
         ("DEBUG"  . "#A020F0")
         ("GOTCHA" . "#FF4500")
         ("STUB"   . "#1E90FF"))) 
+;; use pdf-tools instead of doc-view (63)
+(pdf-tools-install) 
+;; (63)
