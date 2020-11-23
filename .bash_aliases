@@ -116,3 +116,8 @@ function crun() {
     gcc $1
     ./a.out
 }
+
+# set external monitor brightness
+function emb() {
+    xrandr --output HDMI-1 --brightness $1
+}
