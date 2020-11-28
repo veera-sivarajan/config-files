@@ -48,9 +48,8 @@
 ;; key binding for opening multi-term quickly (12)
 (defun openterminal ()
   (interactive)
-  (split-window-sensibly)
-  (other-window 1)
-  (eshell))
+  (split-down-and-switch) 
+  (eshell)) 
 (global-set-key (kbd "C-q")
 		#'openterminal)
 ;; end (12)
@@ -343,7 +342,8 @@
  '(display-line-numbers-width nil)
  '(package-selected-packages
    (quote
-    (pdf-tools hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk))))
+    (pdf-tools hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk)))
+ '(pdf-view-midnight-colors (quote ("white" . "black"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -383,6 +383,7 @@
   (other-window 1)) 
 ;; end (61)
 ;; hl-todo config (62)
+(add-hook 'prog-mode-hook 'hl-todo-mode) 
 (setq hl-todo-keyword-faces
       '(("TODO"   . "#FFFF00")
         ("FIXME"  . "#FF0000")
