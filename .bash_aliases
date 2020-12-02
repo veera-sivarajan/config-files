@@ -17,6 +17,7 @@ alias t='cd /home/veera/Projects/Test' # alias to go straight into test dir
 alias e='exit' # alias to quickly exit terminal
 alias books='cd /home/veera/Books'
 alias lock='loginctl lock-session'
+alias edlab='ssh vsivarajan@elnux.cs.umass.edu'
 
 # create directory and cd into it
 function modr() {  
@@ -107,9 +108,9 @@ function getfile() {
 }
 
 # quickly ssh into edlab
-function edlab() {
-    ssh vsivarajan@elnux.cs.umass.edu
-}
+ #function edlab() {
+#   ssh vsivarajan@elnux.cs.umass.edu
+#}
 
 # quickly compile and execute C programs
 function crun() {
@@ -121,3 +122,6 @@ function crun() {
 function emb() {
     xrandr --output HDMI-1 --brightness $1
 }
+
+# set emacs as default text editor
+export EDITOR=emacs
