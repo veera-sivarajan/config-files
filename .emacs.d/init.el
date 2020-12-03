@@ -115,8 +115,10 @@
 ;; display column number all the time (19)
 (setq column-number-mode t)
 ;; end (19)
-;; highlight current line and set color to gray (20)
+;; highlight current line(not in Org mode) and set color to gray (20)
 (global-hl-line-mode) 
+(make-variable-buffer-local 'global-hl-line-mode) 
+(add-hook 'org-mode-hook (lambda () (setq global-hl-line-mode nil))) 
 (set-face-background 'hl-line "gray13") 
 ;; end (20)
 ;; set location for all backup files (21)
@@ -342,7 +344,7 @@
  '(display-line-numbers-width nil)
  '(package-selected-packages
    (quote
-    (pdf-tools hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk)))
+    (rust-mode pdf-tools hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk)))
  '(pdf-view-midnight-colors (quote ("white" . "black"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
