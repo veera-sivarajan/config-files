@@ -125,3 +125,8 @@ function emb() {
 
 # set emacs as default text editor
 export EDITOR=emacs
+
+# open anything using desired programs and push it to background           
+function open () {
+  xdg-open $1
+}
