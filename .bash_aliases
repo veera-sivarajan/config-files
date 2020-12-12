@@ -85,7 +85,7 @@ function dfg() {
 }
 
 # git and commit Emacs init file
-function egac() {
+function edfg() {
     cd ~/.emacs.d
     dfiles add init.el
     dfiles commit -m "$1"
