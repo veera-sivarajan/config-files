@@ -9,3 +9,5 @@ set shellcmdflag=-ic
 syntax on
 set ruler
 set cindent
+set hlsearch
+set incsearch

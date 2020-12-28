@@ -130,3 +130,18 @@ export EDITOR=emacs
 function open () {
   xdg-open $1
 }
+
+# make and run C program
+function mr () {
+    make
+    make run
+}
+
+# display battery details
+function bat () {
+    upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "state|to\ full|percentage"
+}
+    
+
+
+
