@@ -344,7 +344,7 @@
  '(display-line-numbers-width nil)
  '(package-selected-packages
    (quote
-    (rust-mode pdf-tools hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk)))
+    (slime rust-mode pdf-tools hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk)))
  '(pdf-view-midnight-colors (quote ("white" . "black"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -403,6 +403,7 @@
   (geiser-repl-write-input-ring)) 
 ;; (64)
 ;; treat underscore as part of the word  (65)
+(require 'cc-mode) 
 (modify-syntax-entry ?_ "w" c-mode-syntax-table) 
-(modify-syntax-entry ?_ "w" c++-mode-syntax-table) 
 ;; (65)
+
