@@ -272,7 +272,7 @@
 (add-hook 'emacs-startup-hook
 	  (lambda ()
 	    (cd default-directory)
-	    (eshell)))
+	    (dired ".")))
 ;; end (43)
 ;; inhibit GNU Emacs buffer on startup (44)
 (setq inhibit-startup-message t)
