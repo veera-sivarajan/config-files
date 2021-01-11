@@ -142,6 +142,7 @@ function bat () {
     upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "state|to\ full|percentage"
 }
     
-
-
-
+# always open emacs in background
+emacs () {
+  /usr/bin/emacs "$@" &
+}
