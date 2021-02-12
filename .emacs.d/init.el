@@ -399,16 +399,17 @@
 (defun open-classes ()
   (interactive)
   (dired "/home/veera/Classes/Spring21")) 
-
 (global-set-key (kbd "C-c l") 'open-classes) 
-
+;; (67)
+;; macro to split vertcially and open a file in other window (68)
 (defun split-right-and-open (filename)
   (interactive)
   (split-right-and-switch) 
   (find-file filename)) 
-
-
+;; (68)
+;; macro to split horizontally and open a file in other window (69)
 (defun split-down-and-open (filename)
   (interactive)
   (split-down-and-switch) 
   (find-file filename)) 
+;; (69)
