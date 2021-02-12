@@ -80,7 +80,7 @@ function dfg() {
   dfiles add .bash_aliases
   dfiles add .bashrc
   dfiles add .vimrc
-  dfiles commit -m "$1"
+  dfiles commit 
   dfiles push -u origin master
 }
 
@@ -88,7 +88,7 @@ function dfg() {
 function edfg() {
     cd ~/.emacs.d
     dfiles add init.el
-    dfiles commit -m "$1"
+    dfiles commit
     dfiles push -u origin master
     cd
 }
@@ -144,15 +144,18 @@ emacs () {
   /usr/bin/emacs "$@" &
 }
 
+# open a file in already running Emacs instance
 function ff () {
     emacsclient -n $1          
 }
 
+# split window vertically and open a file in the other window  
 function rff () {
     emacsclient -e '(progn (split-right-and-switch))'
     ff $1
 }
 
+# split window horizontally and open a file in the other window  
 function dff () {
     emacsclient -e '(progn (split-down-and-switch))'
     ff $1

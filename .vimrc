@@ -11,3 +11,4 @@ set ruler
 set cindent
 set hlsearch
 set incsearch
+set path+=.
