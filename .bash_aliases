@@ -9,9 +9,9 @@ function wtr() {
 }
 
 # various aliases to quickly access important directory
-alias 187='cd /home/veera/Classes/Spring20/COMPSCI187/Projects'
-alias cl='cd /home/veera/Classes/Fall20'
-alias 250='cd /home/veera/Classes/Summer20/COMPSCI250'
+alias cl='cd /home/veera/Classes/Spring21'
+alias 220='cd /home/veera/Classes/Spring21/220'
+alias 311='cd /home/veera/Classes/Spring21/311'
 alias proj='cd /home/veera/Projects'
 alias t='cd /home/veera/Projects/Test' # alias to go straight into test dir
 alias e='exit' # alias to quickly exit terminal
@@ -68,7 +68,7 @@ function gac() {
 }
 
 # alias for adding dotfiles to git
-alias dfiles='/usr/bin/git --git-dir=$HOME/.Files/ --work-tree=$HOME'
+alias dfiles='/usr/bin/git --git-dir=$HOME/.files/ --work-tree=$HOME'
 
 # shortened command for executing python3 programs quickly
 function p() {
@@ -123,9 +123,6 @@ function emb() {
     xrandr --output HDMI-1 --brightness $1
 }
 
-# set emacs as default text editor
-export EDITOR=emacs
-
 # open anything using desired programs and push it to background           
 function open () {
   xdg-open $1
@@ -146,3 +143,18 @@ function bat () {
 emacs () {
   /usr/bin/emacs "$@" &
 }
+
+function ff () {
+    emacsclient -n $1          
+}
+
+function rff () {
+    emacsclient -e '(progn (split-right-and-switch))'
+    ff $1
+}
+
+function dff () {
+    emacsclient -e '(progn (split-down-and-switch))'
+    ff $1
+}
+    
