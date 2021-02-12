@@ -336,7 +336,7 @@
  '(display-line-numbers-width nil)
  '(package-selected-packages
    (quote
-    (slime rust-mode pdf-tools hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk)))
+    (markdown-mode slime rust-mode pdf-tools hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk)))
  '(pdf-view-midnight-colors (quote ("white" . "black"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -344,6 +344,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 158 :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
+ '(hl-todo ((t (:foreground "#cc9393" :slant italic :weight ultra-bold))))
  '(line-number-current-line ((t (:inherit line-number :foreground "gold"))))
  '(mode-line ((t (:background "gray27"))))
  '(mode-line-inactive ((t (:background "gray17"))))
@@ -383,7 +384,7 @@
         ("FIXME"  . "#FF0000")
         ("DEBUG"  . "#A020F0")
         ("GOTCHA" . "#FF4500")
-        ("STUB"   . "#1E90FF"))) 
+        ("NOTE"   . "#1E90FF"))) 
 ;; use pdf-tools instead of doc-view (63)
 (pdf-tools-install) 
 ;; (63)
@@ -391,4 +392,23 @@
 (require 'cc-mode) 
 (modify-syntax-entry ?_ "w" c-mode-syntax-table) 
 ;; (65)
+;; change color for comments (66)
+(set-face-foreground 'font-lock-comment-face "#7a7272") 
+;; (66)
+;; shortcut to open classes directory in dired mode (67)
+(defun open-classes ()
+  (interactive)
+  (dired "/home/veera/Classes/Spring21")) 
 
+(global-set-key (kbd "C-c l") 'open-classes) 
+
+(defun split-right-and-open (filename)
+  (interactive)
+  (split-right-and-switch) 
+  (find-file filename)) 
+
+
+(defun split-down-and-open (filename)
+  (interactive)
+  (split-down-and-switch) 
+  (find-file filename)) 
