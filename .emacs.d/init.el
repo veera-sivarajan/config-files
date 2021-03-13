@@ -31,7 +31,6 @@
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda ()
 			   (org-bullets-mode 1)))
-(setq org-ellipsis "⤵") ;; set ellipsis symbol to something cool 
 ;; end (9)
 ;; disable line numbers for org-mode (10)
 (add-hook 'org-mode-hook (lambda ()
@@ -334,9 +333,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(display-line-numbers-width nil)
+ '(org-ellipsis "")
  '(package-selected-packages
    (quote
-    (markdown-mode slime rust-mode pdf-tools hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk)))
+    (htmlize markdown-mode slime rust-mode pdf-tools hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk)))
  '(pdf-view-midnight-colors (quote ("white" . "black"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -344,11 +344,17 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 158 :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
+ '(font-lock-builtin-face ((t (:foreground "gray"))))
+ '(font-lock-comment-face ((t (:foreground "dim gray" :slant italic))))
+ '(font-lock-function-name-face ((t (:foreground "white"))))
+ '(font-lock-keyword-face ((t (:foreground "cyan"))))
+ '(font-lock-string-face ((t (:foreground "DodgerBlue1"))))
  '(hl-todo ((t (:foreground "#cc9393" :slant italic :weight ultra-bold))))
  '(line-number-current-line ((t (:inherit line-number :foreground "gold"))))
  '(mode-line ((t (:background "gray27"))))
  '(mode-line-inactive ((t (:background "gray17"))))
- '(org-ellipsis ((t (:foreground "gray100" :box nil :underline nil :slant italic :weight light :height 150 :width ultra-condensed)))))
+ '(org-ellipsis ((t (:foreground "gray100" :box nil :underline nil :slant italic :weight light :height 150 :width ultra-condensed))))
+ '(org-level-1 ((t (:foreground "light sky blue")))))
  
 ;; end (57)
 ;; function to open file in top window (58)
