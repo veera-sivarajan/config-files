@@ -127,3 +127,4 @@ HISTCONTROL=ignoreboth
 
 # store history immediately
 PROMPT_COMMAND='history -a'
+source "$HOME/.cargo/env"
