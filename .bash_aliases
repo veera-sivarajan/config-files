@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # load thirukural script to shell
-source ~/Projects/.ThirukkuralAPI/src/script.sh
+source ~/Projects/.ThirukkuralAPI/src/kural.sh
 
 # command to check weather
 function wtr() {
@@ -146,6 +146,13 @@ emacs () {
 
 # open a file in already running Emacs instance
 function ff () {
+    is_open=`ps -fe | grep "/usr/bin/emacs" | grep -vc grep`
+    if [ $is_open -eq 0 ]; then # if emacs is not open already
+        echo "Opening new Emacs instance"
+        (emacs)
+        (sleep 2.5)  # wait for emacs to load config file and server-start  
+        (emacsclient -n $1)
+    fi
     emacsclient -n $1          
 }
 
