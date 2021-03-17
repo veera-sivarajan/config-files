@@ -253,12 +253,6 @@
 ;; modify eshell prompt regexp (42)
 (setq eshell-prompt-regexp "^[^#$\n]*[#$] ")
 ;; end (42)
-;; open eshell when opening emacs (43)
-(add-hook 'emacs-startup-hook
-	  (lambda ()
-	    (cd default-directory)
-	    (dired ".")))
-;; end (43)
 ;; inhibit GNU Emacs buffer on startup (44)
 (setq inhibit-startup-message t)
 ;; end (44)
@@ -327,6 +321,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(display-line-numbers-width nil)
+ '(haskell-interactive-popup-errors nil)
  '(org-ellipsis "")
  '(package-selected-packages
    (quote
@@ -424,4 +419,7 @@
 (load "/home/veera/Projects/Syntax-Highlight/highlight.el") 
 (add-to-list 'auto-mode-alist '("\\.c\\'" . minc-mode))
 (add-to-list 'auto-mode-alist '("\\.h\\'" . minc-mode))
+;; (72)
+;; always start emacs in server mode (73)
+(server-start)
 ;; (72)
