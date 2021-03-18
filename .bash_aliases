@@ -152,8 +152,9 @@ function ff () {
         (emacs)
         (sleep 2.5)  # wait for emacs to load config file and server-start  
         (emacsclient -n $1)
+    else
+        emacsclient -n $1          
     fi
-    emacsclient -n $1          
 }
 
 # split window vertically and open a file in the other window  
