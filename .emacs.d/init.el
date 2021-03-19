@@ -363,9 +363,18 @@
 ;; always start emacs in server mode (73)
 (server-start)
 ;; (72)
-;; scheme mode config (73)
-(defun scheme-mode-load-and-switch () 
+;; Scheme config
+;; immediately load scheme file into inferior process (73)
+(defun my-scheme-load-file ()
+  "Load `buffer-file-name' into current inferior Scheme process
+and switch to REPL" 
   (interactive)
-  (setq file-name (concat "" (buffer-file-name)))
-  (scheme-load-file file-name)) 
-;;  (73)
+  (evil-normal-state)
+  (save-buffer) 
+  (comint-send-string (scheme-proc) (concat "(load \""
+                                           (buffer-file-name)
+                                           "\")\n"))
+  (evil-window-down 1)) 
+(add-hook 'scheme-mode-hook (lambda ()
+                         (local-set-key (kbd "C-h C-j") 'my-scheme-load-file))) 
+;; (73)
