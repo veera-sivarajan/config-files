@@ -11,7 +11,7 @@
 (toggle-scroll-bar -1) ;; scroll bar
 ;; end (3)
 ;; set font to Ubuntu Mono with size = 16 (4)
-(set-default-font "Ubuntu Mono-16")
+(set-default-font "Ubuntu Mono-16") 
 ;; end (4)
 ;; Evil Mode (5)
 (setq evil-mode-line-format nil) ;; disable evil-mode state indicator
@@ -48,11 +48,12 @@
 ;; end (14)
 ;; Always do syntax highlighting 
 (global-font-lock-mode 1)
-;; highlight parens 
+;; highlight parens  (15)
 (setq show-paren-delay 0
       show-paren-style 'parenthesis)
 (show-paren-mode 1)
-;; (16)
+;; (15)
+;; (16) set-face for highlighted region
 (set-face-foreground 'region "black")
 (set-face-background 'region "white") 
 ;; end (16)
@@ -265,7 +266,7 @@
  '(org-ellipsis "")
  '(package-selected-packages
    (quote
-    (htmlize markdown-mode slime rust-mode pdf-tools hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk)))
+    (evil-cleverparens paredit htmlize markdown-mode slime rust-mode pdf-tools hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk)))
  '(pdf-view-midnight-colors (quote ("white" . "black"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -273,7 +274,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 158 :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
- '(dired-directory ((t (:foreground "medium blue"))))
+ '(dired-directory ((t (:foreground "gold2"))))
  '(font-lock-builtin-face ((t (:foreground "gray"))))
  '(font-lock-comment-face ((t (:foreground "dim gray" :slant italic))))
  '(font-lock-function-name-face ((t (:foreground "white"))))
