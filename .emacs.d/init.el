@@ -153,7 +153,7 @@
       user-mail-address "sveera.2001@gmail.com")
 ;; end (30)
 ;; custom frame title (31)
-(setq frame-title-format '((:eval (projectile-project-name))))
+(setq frame-title-format '("Emacs")) 
 ;; end (31)
 ;; auto save on current file (32)
 (auto-save-visited-mode 1)

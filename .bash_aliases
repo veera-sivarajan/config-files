@@ -155,6 +155,7 @@ function ff () {
     else
         emacsclient -n $1          
     fi
+    wmctrl -a Emacs  # switch focus to Emacs window 
 }
 
 # split window vertically and open a file in the other window  
