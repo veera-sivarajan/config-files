@@ -18,15 +18,19 @@ alias e='exit' # alias to quickly exit terminal
 alias books='cd /home/veera/Books'
 alias lock='loginctl lock-session'
 alias edlab='ssh vsivarajan@elnux.cs.umass.edu'
+alias gs='git status' 
+alias blog='cd /home/veera/Projects/Blog/drafts'
+alias lard='du -hs */ | sort -hr | head' # view 10 largest directories in cur dir 
+alias ld='ls -d */' # list all directories
 
 # create directory and cd into it
-function modr() {  
+function mcd() {  
     mkdir $1
     cd $1
 }
 
 # change directory and list the current directory
-function cs() {   
+function cdl() {   
   cd $1
   ls
 }
@@ -39,15 +43,10 @@ function cwd() {
   pwd | xclip -selection clipboard
 }
 
-# log off command for KDE5
+# log off command for KDE5 Plasma
 function bye() {
   qdbus org.kde.ksmserver /KSMServer logout 0 0 0
 }
-
-# screen lock command for KDE5
-# function lock() {
- # loginctl lock-session
-# } 
 
 # execute vtags from ~/Projects/ 
 function vtags() {
@@ -128,22 +127,11 @@ function open () {
   xdg-open $1
 }
 
-# make and run C program
-function mr () {
-    make
-    make run
-}
-
 # display battery details
 function bat () {
     upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "state|to\ full|percentage"
 }
     
-# always open emacs in background
-emacs () {
-  /usr/bin/emacs "$@" &
-}
-
 # open a file in already running Emacs instance
 function ff () {
     is_open=`ps -fe | grep "/usr/bin/emacs" | grep -vc grep`
@@ -155,7 +143,7 @@ function ff () {
     else
         emacsclient -n $1          
     fi
-    wmctrl -a Emacs  # switch focus to Emacs window 
+    wmctrl -a "Emacs"  # switch focus to Emacs window 
 }
 
 # split window vertically and open a file in the other window  
@@ -168,5 +156,16 @@ function rff () {
 function dff () {
     emacsclient -e '(progn (split-down-and-switch))'
     ff $1
+}
+    
+
+# command to get the top 10 commands from history
+function hiso () {
+    history | awk '{print $4}' | sort | uniq -c | sort -rn | head
+}
+
+# list number of journal entries for each month
+function dstat () {
+    sed -n '/^*/p' /home/veera/Diary.org | tail -n +2 | awk '{ print $2 }' | uniq -c
 }
     
