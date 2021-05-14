@@ -219,9 +219,9 @@
 (add-hook 'haskell-interactive-mode-hook (lambda ()
 			       (local-set-key (kbd "C-'") 'back-to-file)))
 ;; end (39)
-;; custom color for org TODO face (40)
+;; custom color for org TODO faces (40)
 (setq org-todo-keyword-faces
-      '(("TODO" . "IndianRed1") ("DONE" . "SpringGreen1")))
+      '(("TODO" . "IndianRed1") ("WORK" . "azure1") ("DONE" . "SpringGreen1")))
 ;; end (40)
 ;; inhibit GNU Emacs buffer on startup (44)
 (setq inhibit-startup-message t)
@@ -263,11 +263,13 @@
  ;; If there is more than one, they won't work right.
  '(display-line-numbers-width nil)
  '(haskell-interactive-popup-errors nil)
+ '(moody-mode-line-height 27)
  '(org-ellipsis "")
  '(package-selected-packages
    (quote
     (evil-cleverparens paredit htmlize markdown-mode slime rust-mode pdf-tools hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk)))
- '(pdf-view-midnight-colors (quote ("white" . "black"))))
+ '(pdf-view-midnight-colors (quote ("white" . "black")))
+ '(scheme-program-name "mit-scheme"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -279,13 +281,14 @@
  '(font-lock-comment-face ((t (:foreground "dim gray" :slant italic))))
  '(font-lock-function-name-face ((t (:foreground "white"))))
  '(font-lock-keyword-face ((t (:foreground "cyan"))))
- '(font-lock-string-face ((t (:foreground "orange red"))))
+ '(font-lock-string-face ((t (:foreground "light sky blue"))))
  '(hl-todo ((t (:foreground "#cc9393" :slant italic :weight ultra-bold))))
  '(line-number-current-line ((t (:inherit line-number :foreground "gold"))))
- '(mode-line ((t (:background "gray27"))))
- '(mode-line-inactive ((t (:background "gray17"))))
+ '(mode-line ((t (:background "gray28" :weight ultra-bold :height 148))))
+ '(mode-line-inactive ((t (:background "gray13" :foreground "gainsboro" :height 148))))
  '(org-ellipsis ((t (:foreground "gray100" :box nil :underline nil :slant italic :weight light :height 150 :width ultra-condensed))))
- '(org-level-1 ((t (:foreground "light sky blue")))))
+ '(org-level-1 ((t (:foreground "light sky blue"))))
+ '(vertical-border ((((type x) (background dark)) (:foreground "gray18")))))
  
 ;; end (57)
 ;; function to open file in top window (58)
@@ -379,3 +382,9 @@ and switch to REPL"
 (add-hook 'scheme-mode-hook (lambda ()
                          (local-set-key (kbd "C-h C-j") 'my-scheme-load-file))) 
 ;; (73)
+;; vim like ex command for finding file (74)
+(evil-ex-define-cmd "f[ind]" 'ido-find-file) 
+;; (74)
+;; list workflow states in ORG mode
+ (setq org-todo-keywords
+      '((sequence "TODO" "WORK" "|" "DONE"))) 
