@@ -11,7 +11,7 @@
 (toggle-scroll-bar -1) ;; scroll bar
 ;; end (3)
 ;; set font to Ubuntu Mono with size = 16 (4)
-(set-default-font "Ubuntu Mono-16") 
+(set-default-font "Ubuntu Mono-18") 
 ;; end (4)
 ;; Evil Mode (5)
 (setq evil-mode-line-format nil) ;; disable evil-mode state indicator
@@ -267,7 +267,7 @@
  '(org-ellipsis "")
  '(package-selected-packages
    (quote
-    (evil-cleverparens paredit htmlize markdown-mode slime rust-mode pdf-tools hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk)))
+    (swift-mode evil-cleverparens paredit htmlize markdown-mode slime rust-mode pdf-tools hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk)))
  '(pdf-view-midnight-colors (quote ("white" . "black")))
  '(scheme-program-name "mit-scheme"))
 (custom-set-faces
@@ -385,6 +385,23 @@ and switch to REPL"
 ;; vim like ex command for finding file (74)
 (evil-ex-define-cmd "f[ind]" 'ido-find-file) 
 ;; (74)
-;; list workflow states in ORG mode
+;; list workflow states in ORG mode (75)
  (setq org-todo-keywords
       '((sequence "TODO" "WORK" "|" "DONE"))) 
+;; (75)
+;; set firefox as default browser (76)
+(setq browse-url-browser-function 'browse-url-firefox) 
+;; (76)
+;; elisp function to insert date in a buffer in my preferred format (77)
+(defun get-date ()
+  (concat "** "
+          (format-time-string "%b")
+          " "
+          (format-time-string "%d")
+          ", "
+          (format-time-string "%G"))) 
+
+(defun insert-date () 
+  (interactive) 
+  (insert (get-date))) 
+;; (77)
