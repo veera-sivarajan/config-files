@@ -11,7 +11,7 @@
 (toggle-scroll-bar -1) ;; scroll bar
 ;; end (3)
 ;; set font to Ubuntu Mono with size = 16 (4)
-(set-default-font "Ubuntu Mono-18") 
+(set-default-font "Ubuntu Mono 18") 
 ;; end (4)
 ;; Evil Mode (5)
 (setq evil-mode-line-format nil) ;; disable evil-mode state indicator
@@ -275,7 +275,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 158 :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
+ '(default ((t (:inherit nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
  '(dired-directory ((t (:foreground "gold2"))))
  '(font-lock-builtin-face ((t (:foreground "gray"))))
  '(font-lock-comment-face ((t (:foreground "dim gray" :slant italic))))
@@ -289,6 +289,7 @@
  '(org-ellipsis ((t (:foreground "gray100" :box nil :underline nil :slant italic :weight light :height 150 :width ultra-condensed))))
  '(org-level-1 ((t (:foreground "light sky blue"))))
  '(vertical-border ((((type x) (background dark)) (:foreground "gray18")))))
+ 
  
 ;; end (57)
 ;; function to open file in top window (58)
