@@ -379,7 +379,7 @@ and switch to REPL"
   (comint-send-string (scheme-proc) (concat "(load \""
                                            (buffer-file-name)
                                            "\")\n"))
-  (switch-to-buffer-other-window "*scheme*")) 
+  (switch-to-scheme-interp))  
 (add-hook 'scheme-mode-hook (lambda ()
                          (local-set-key (kbd "C-h C-j") 'my-scheme-load-file))) 
 ;; (73)
@@ -406,3 +406,23 @@ and switch to REPL"
   (interactive) 
   (insert (get-date))) 
 ;; (77)
+;; Scheme switch file to interpreter and back (78)
+(defvar-local prev-scheme-file nil) 
+
+(defun switch-to-scheme-interp ()
+  (interactive)
+  (let ((initial-buffer (current-buffer)))
+    (switch-to-buffer-other-window "*scheme*")
+    (with-current-buffer (current-buffer) 
+      (setq prev-scheme-file initial-buffer)))) 
+
+(defun switch-to-scheme-file ()
+  (interactive)
+  (if prev-scheme-file
+      (switch-to-buffer-other-window prev-scheme-file)
+    (message "No previous buffer."))) 
+
+(add-hook 'inferior-scheme-mode-hook
+          (lambda () (local-set-key (kbd "C-h C-j")
+                                    'switch-to-scheme-file))) 
+;; (78)
