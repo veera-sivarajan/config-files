@@ -202,7 +202,7 @@
  (setq magit-process-password-prompt-regexps '("^\r?\\(Enter \\)?[Pp]assphrase\\( for \\(RSA \\)?key '.*'\\)?: ?$" "^\\(Enter \\)?[Pp]assword\\( for '\\(https?://\\)?\\(?99:.*\\)'\\)?: ?$" "^.*'s password: ?$" "^Yubikey for .*: ?$" "^Enter PIN for .*: ?$"))
 ;; end (36)
 ;; set key binding for Magit-status (37)
-(global-set-key (kbd "<f9>") 'magit-status)
+(global-set-key (kbd "M-m") 'magit-status) 
 ;; end (37)
 ;; kill all buffers, windows and open eshell (38)
 (defun kill-buffers-open-dired ()
@@ -379,7 +379,7 @@ and switch to REPL"
   (comint-send-string (scheme-proc) (concat "(load \""
                                            (buffer-file-name)
                                            "\")\n"))
-  (evil-window-down 1)) 
+  (switch-to-buffer-other-window "*scheme*")) 
 (add-hook 'scheme-mode-hook (lambda ()
                          (local-set-key (kbd "C-h C-j") 'my-scheme-load-file))) 
 ;; (73)
