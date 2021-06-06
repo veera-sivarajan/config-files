@@ -1,20 +1,21 @@
+(defvar-local prev-scheme-file nil) 
+
 (defun my-scheme-load-file ()
   "Load `buffer-file-name' into current inferior Scheme process
 and switch to REPL" 
   (interactive)
-  (evil-normal-state)
+  (evil-normal-state) ;; comment line if not using evil mode
   (save-buffer) 
   (comint-send-string (scheme-proc) (concat "(load \""
                                            (buffer-file-name)
                                            "\")\n"))
   (switch-to-scheme-interp))  
-(add-hook 'scheme-mode-hook (lambda ()
-                         (local-set-key (kbd "C-h C-j") 'my-scheme-load-file))) 
 
-(defvar-local prev-scheme-file nil) 
+(add-hook 'scheme-mode-hook (lambda ()
+                              (local-set-key (kbd "C-h C-j")
+                                             'my-scheme-load-file))) 
 
 (defun switch-to-scheme-interp ()
-  (interactive)
   (let ((initial-buffer (current-buffer)))
     (switch-to-buffer-other-window "*scheme*")
       (setq prev-scheme-file initial-buffer)))
