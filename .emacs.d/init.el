@@ -370,18 +370,18 @@
 ;; (72)
 ;; Scheme config
 ;; immediately load scheme file into inferior process (73)
-(defun my-scheme-load-file ()
-  "Load `buffer-file-name' into current inferior Scheme process
-and switch to REPL" 
-  (interactive)
-  (evil-normal-state)
-  (save-buffer) 
-  (comint-send-string (scheme-proc) (concat "(load \""
-                                           (buffer-file-name)
-                                           "\")\n"))
-  (switch-to-scheme-interp))  
-(add-hook 'scheme-mode-hook (lambda ()
-                         (local-set-key (kbd "C-h C-j") 'my-scheme-load-file))) 
+;; (defun my-scheme-load-file ()
+;;   "Load `buffer-file-name' into current inferior Scheme process
+;; and switch to REPL" 
+;;   (interactive)
+;;   (evil-normal-state)
+;;   (save-buffer) 
+;;   (comint-send-string (scheme-proc) (concat "(load \""
+;;                                            (buffer-file-name)
+;;                                            "\")\n"))
+;;   (switch-to-scheme-interp))  
+;; (add-hook 'scheme-mode-hook (lambda ()
+;;                          (local-set-key (kbd "C-h C-j") 'my-scheme-load-file))) 
 ;; (73)
 ;; vim like ex command for finding file (74)
 (evil-ex-define-cmd "f[ind]" 'ido-find-file) 
@@ -407,22 +407,22 @@ and switch to REPL"
   (insert (get-date))) 
 ;; (77)
 ;; Scheme switch file to interpreter and back (78)
-(defvar-local prev-scheme-file nil) 
+;; (defvar-local prev-scheme-file nil) 
 
-(defun switch-to-scheme-interp ()
-  (interactive)
-  (let ((initial-buffer (current-buffer)))
-    (switch-to-buffer-other-window "*scheme*")
-    (with-current-buffer (current-buffer) 
-      (setq prev-scheme-file initial-buffer)))) 
+;; (defun switch-to-scheme-interp ()
+;;   (interactive)
+;;   (let ((initial-buffer (current-buffer)))
+;;     (switch-to-buffer-other-window "*scheme*")
+;;       (setq prev-scheme-file initial-buffer)))
 
-(defun switch-to-scheme-file ()
-  (interactive)
-  (if prev-scheme-file
-      (switch-to-buffer-other-window prev-scheme-file)
-    (message "No previous buffer."))) 
+;; (defun switch-to-scheme-file ()
+;;   (interactive)
+;;   (if prev-scheme-file
+;;       (switch-to-buffer-other-window prev-scheme-file)
+;;     (message "No previous buffer."))) 
 
-(add-hook 'inferior-scheme-mode-hook
-          (lambda () (local-set-key (kbd "C-h C-j")
-                                    'switch-to-scheme-file))) 
+;; (add-hook 'inferior-scheme-mode-hook
+;;           (lambda () (local-set-key (kbd "C-h C-j")
+;;                                     'switch-to-scheme-file))) 
 ;; (78)
+(load-file "/home/veera/.emacs.d/scheme-config.el") 
