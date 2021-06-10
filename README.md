@@ -1,2 +1,2 @@
-# DotFiles
-A repo to store all my dotfiles
+# My Config Files
+- All files are commented and updated regularly.  
