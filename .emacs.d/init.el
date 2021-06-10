@@ -278,7 +278,7 @@
  '(default ((t (:inherit nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
  '(dired-directory ((t (:foreground "gold2"))))
  '(font-lock-builtin-face ((t (:foreground "gray"))))
- '(font-lock-comment-face ((t (:foreground "dim gray" :slant italic))))
+ '(font-lock-comment-face ((t (:foreground "#7a7272"))))
  '(font-lock-function-name-face ((t (:foreground "white"))))
  '(font-lock-keyword-face ((t (:foreground "cyan"))))
  '(font-lock-string-face ((t (:foreground "light sky blue"))))
