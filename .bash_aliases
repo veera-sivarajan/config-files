@@ -169,3 +169,7 @@ function dstat () {
     sed -n '/^*/p' /home/veera/Diary.org | tail -n +2 | awk '{ print $2 }' | uniq -c
 }
     
+# display total number of commits in a repo
+function comc () {
+    git log --format='%an' | sort | uniq -c | awk '{s+=$1} END {printf "%.0f\n", s}'
+} 
