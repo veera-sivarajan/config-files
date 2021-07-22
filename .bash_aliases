@@ -119,7 +119,7 @@ function crun() {
 
 # set external monitor brightness
 function emb() {
-    xrandr --output HDMI-1 --brightness $1
+    xrandr --output HDMI-1-0 --brightness $1
 }
 
 # open anything using desired programs and push it to background           
