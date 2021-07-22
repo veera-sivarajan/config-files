@@ -11,7 +11,7 @@
 (toggle-scroll-bar -1) ;; scroll bar
 ;; end (3)
 ;; set font to Ubuntu Mono with size = 16 (4)
-(set-default-font "Ubuntu Mono 18") 
+(set-default-font "Ubuntu Mono 16") 
 ;; end (4)
 ;; Evil Mode (5)
 (setq evil-mode-line-format nil) ;; disable evil-mode state indicator
@@ -265,9 +265,11 @@
  '(haskell-interactive-popup-errors nil)
  '(moody-mode-line-height 27)
  '(org-ellipsis "")
+ '(org-html-head-include-default-style nil)
+ '(org-startup-folded t)
  '(package-selected-packages
    (quote
-    (swift-mode evil-cleverparens paredit htmlize markdown-mode slime rust-mode pdf-tools hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk)))
+    (ox-reveal org-plus-contrib swift-mode evil-cleverparens paredit htmlize markdown-mode slime rust-mode pdf-tools hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk)))
  '(pdf-view-midnight-colors (quote ("white" . "black")))
  '(scheme-program-name "mit-scheme"))
 (custom-set-faces
@@ -276,7 +278,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
- '(dired-directory ((t (:foreground "gold2"))))
+ '(dired-directory ((t (:foreground "cornflower blue"))))
  '(font-lock-builtin-face ((t (:foreground "gray"))))
  '(font-lock-comment-face ((t (:foreground "#7a7272"))))
  '(font-lock-function-name-face ((t (:foreground "white"))))
@@ -289,7 +291,6 @@
  '(org-ellipsis ((t (:foreground "gray100" :box nil :underline nil :slant italic :weight light :height 150 :width ultra-condensed))))
  '(org-level-1 ((t (:foreground "light sky blue"))))
  '(vertical-border ((((type x) (background dark)) (:foreground "gray18")))))
- 
  
 ;; end (57)
 ;; function to open file in top window (58)
@@ -395,34 +396,29 @@
 ;; (76)
 ;; elisp function to insert date in a buffer in my preferred format (77)
 (defun get-date ()
-  (concat "** "
-          (format-time-string "%b")
-          " "
-          (format-time-string "%d")
-          ", "
-          (format-time-string "%G"))) 
+  (format-time-string "** %b %d, %G")) 
 
 (defun insert-date () 
   (interactive) 
   (insert (get-date))) 
 ;; (77)
-;; Scheme switch file to interpreter and back (78)
-;; (defvar-local prev-scheme-file nil) 
-
-;; (defun switch-to-scheme-interp ()
-;;   (interactive)
-;;   (let ((initial-buffer (current-buffer)))
-;;     (switch-to-buffer-other-window "*scheme*")
-;;       (setq prev-scheme-file initial-buffer)))
-
-;; (defun switch-to-scheme-file ()
-;;   (interactive)
-;;   (if prev-scheme-file
-;;       (switch-to-buffer-other-window prev-scheme-file)
-;;     (message "No previous buffer."))) 
-
-;; (add-hook 'inferior-scheme-mode-hook
-;;           (lambda () (local-set-key (kbd "C-h C-j")
-;;                                     'switch-to-scheme-file))) 
-;; (78)
+;; load all scheme config (78)
 (load-file "/home/veera/.emacs.d/scheme-config.el") 
+;; (78)
+;; Close compilation buffer automatically if success (79)
+(defun bury-compile-buffer-if-successful (buffer string)
+  "Bury a compilation buffer if succeeded without warnings "
+  (if (and
+       (string-match "compilation" (buffer-name buffer))
+       (string-match "finished" string)
+       (not
+        (with-current-buffer buffer
+          (goto-char 1)
+          (search-forward "warning" nil t))))
+      (run-with-timer 1 nil
+                      (lambda (buf)
+                        (bury-buffer buf)
+                        (switch-to-prev-buffer (get-buffer-window buf) 'kill))
+                      buffer)))
+(add-hook 'compilation-finish-functions 'bury-compile-buffer-if-successful)
+;; (79)

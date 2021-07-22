@@ -166,10 +166,22 @@ function hiso () {
 
 # list number of journal entries for each month
 function dstat () {
-    sed -n '/^*/p' /home/veera/Diary.org | tail -n +2 | awk '{ print $2 }' | uniq -c
+    temp=$(sed -n '/^*/p' /home/veera/Diary.org | tail -n +2 | awk '{ print $2 }' | uniq -c | awk '{t=$1; $1=$2; $2=t; print;}')
+    echo "$temp"
+    total=$(echo "$temp" | awk '{s+=$2} END {print s}')
+    echo "---------------"
+    echo "Total: $total"
+    echo "---------------"
 }
     
 # display total number of commits in a repo
 function comc () {
     git log --format='%an' | sort | uniq -c | awk '{s+=$1} END {printf "%.0f\n", s}'
 } 
+
+# download audio from Youtube using youtube-dl
+function dl {
+    python3 $(which youtube-dl) --extract-audio --audio-format mp3 $1
+}
+    
+

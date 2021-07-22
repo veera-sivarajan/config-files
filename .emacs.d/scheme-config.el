@@ -8,7 +8,7 @@ and switch to REPL"
   (save-buffer) 
   (comint-send-string (scheme-proc) (concat "(load \""
                                            (buffer-file-name)
-                                           "\")\n"))
+                                           "\")\n")) 
   (switch-to-scheme-interp))  
 
 (add-hook 'scheme-mode-hook (lambda ()
