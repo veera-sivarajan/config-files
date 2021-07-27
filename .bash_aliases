@@ -166,7 +166,13 @@ function hiso () {
 
 # list number of journal entries for each month
 function dstat () {
-    temp=$(sed -n '/^*/p' /home/veera/Diary.org | tail -n +2 | awk '{ print $2 }' | uniq -c | awk '{t=$1; $1=$2; $2=t; print;}')
+    if [ $# -eq 0 ] # if no arguments 
+    then
+        file='/home/veera/Diary.org'
+    else
+        file=$1
+    fi
+    temp=$(sed -n '/^*/p' "$file" | tail -n +2 | awk '{ print $2 }' | uniq -c | awk '{t=$1; $1=$2; $2=t; print;}')
     echo "$temp"
     total=$(echo "$temp" | awk '{s+=$2} END {print s}')
     echo "---------------"
@@ -183,5 +189,3 @@ function comc () {
 function dl {
     python3 $(which youtube-dl) --extract-audio --audio-format mp3 $1
 }
-    
-
