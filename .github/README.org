@@ -1,0 +1,8 @@
+#+TITLE: Config Files
+
+#+BEGIN_QUOTE
+But to John's astonishment, Peter had actually cut down more wood. How did this even happen? "How could you have chopped down more trees than me? I heard you stop working every hour for fifteen minutes!", exclaimed John.
+
+Peter replied, "Well, it's really simple. Every time I stopped work, while you were still chopping down trees, I was sharpening my axe."
+#+END_QUOTE
+
