@@ -204,7 +204,7 @@
 ;; set key binding for Magit-status (37)
 (global-set-key (kbd "M-m") 'magit-status) 
 ;; end (37)
-;; kill all buffers, windows and open eshell (38)
+;; kill all buffers, windows and open dired in current directory (38)
 (defun kill-buffers-open-dired ()
   (interactive)
   (mapcar 'kill-buffer (buffer-list))
@@ -368,21 +368,6 @@
 ;; (72)
 ;; always start emacs in server mode (73)
 (server-start)
-;; (72)
-;; Scheme config
-;; immediately load scheme file into inferior process (73)
-;; (defun my-scheme-load-file ()
-;;   "Load `buffer-file-name' into current inferior Scheme process
-;; and switch to REPL" 
-;;   (interactive)
-;;   (evil-normal-state)
-;;   (save-buffer) 
-;;   (comint-send-string (scheme-proc) (concat "(load \""
-;;                                            (buffer-file-name)
-;;                                            "\")\n"))
-;;   (switch-to-scheme-interp))  
-;; (add-hook 'scheme-mode-hook (lambda ()
-;;                          (local-set-key (kbd "C-h C-j") 'my-scheme-load-file))) 
 ;; (73)
 ;; vim like ex command for finding file (74)
 (evil-ex-define-cmd "f[ind]" 'ido-find-file) 
@@ -397,7 +382,6 @@
 ;; elisp function to insert date in a buffer in my preferred format (77)
 (defun get-date ()
   (format-time-string "** %b %d, %G")) 
-
 (defun insert-date () 
   (interactive) 
   (insert (get-date))) 

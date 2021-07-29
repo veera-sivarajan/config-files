@@ -20,7 +20,10 @@ alias lock='loginctl lock-session'
 alias edlab='ssh vsivarajan@elnux.cs.umass.edu'
 alias gs='git status' 
 alias blog='cd /home/veera/Projects/Blog/drafts'
-alias lard='du -hs */ | sort -hr | head' # view 10 largest directories in cur dir 
+alias lard='du -hs */ | sort -hr | head' # view 10 largest dirs in current dir 
+alias mr='make && make run' # make and run program
+alias mrv='make && make runv' # make and run program with valgrind
+
 alias ld='ls -d */' # list all directories
 
 # create directory and cd into it
