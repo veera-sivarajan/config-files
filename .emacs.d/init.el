@@ -11,7 +11,7 @@
 (toggle-scroll-bar -1) ;; scroll bar
 ;; end (3)
 ;; set font to Ubuntu Mono with size = 16 (4)
-(set-default-font "Ubuntu Mono 16") 
+(set-frame-font "Ubuntu Mono 16" nil t) 
 ;; end (4)
 ;; Evil Mode (5)
 (setq evil-mode-line-format nil) ;; disable evil-mode state indicator
@@ -67,8 +67,7 @@
             evil-insert-lines t
             evil-insert-vcount nil)
     (evil-insert-state 1)
-    (add-hook 'post-command-hook #'evil-maybe-remove-spaces)
-    )
+    (add-hook 'post-command-hook #'evil-maybe-remove-spaces))
 ;; end (17)
 ;; Fix for Haskell-evil bug on pressing 'O' (18)
 (defun evil-open-above (count)
@@ -227,8 +226,9 @@
 (setq inhibit-startup-message t)
 ;; end (44)
 ;; dired hide details mode global set (47)
-(add-hook 'dired-mode-hook
-	  (lambda () (dired-hide-details-mode +1)))
+;; (add-hook 'dired-mode-hook
+;; 	  (lambda () (dired-hide-details-mode +1)))
+(setq dired-listing-switches "-goh") 
 ;; end (47)
 ;; I don't like tabs (50)
 (setq-default indent-tabs-mode nil) 
@@ -268,16 +268,15 @@
  '(org-html-head-include-default-style nil)
  '(org-startup-folded t)
  '(package-selected-packages
-   (quote
-    (ox-reveal org-plus-contrib swift-mode evil-cleverparens paredit htmlize markdown-mode slime rust-mode pdf-tools hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk)))
- '(pdf-view-midnight-colors (quote ("white" . "black")))
+   '(undo-tree ox-reveal org-plus-contrib swift-mode evil-cleverparens paredit htmlize markdown-mode slime rust-mode pdf-tools hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk))
+ '(pdf-view-midnight-colors '("white" . "black"))
  '(scheme-program-name "mit-scheme"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
+ '(default ((t (:inherit nil :extend nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 158 :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
  '(dired-directory ((t (:foreground "cornflower blue"))))
  '(font-lock-builtin-face ((t (:foreground "gray"))))
  '(font-lock-comment-face ((t (:foreground "#7a7272"))))
@@ -304,14 +303,14 @@
   (interactive)
   (evil-open-below 1)
   (c-indent-line-or-region)) 
-(evil-define-key 'normal c-mode-map (kbd "o") 'my-open-below-line)  
+(evil-define-key 'normal c-mode-base-map (kbd "o") 'my-open-below-line)  
 ;; end (59)
 ;; remap O to open line above and indent (60)
 (defun my-open-above-line ()
   (interactive)
   (evil-open-above 1)
   (c-indent-line-or-region)) 
-(evil-define-key 'normal c-mode-map (kbd "O") 'my-open-above-line)  
+(evil-define-key 'normal c-mode-base-map (kbd "O") 'my-open-above-line)  
 ;; end (60)
 ;; Macro to list all buffers and switch cursor to other window (61)
 (defun my-list-buffers-and-switch ()
@@ -406,3 +405,25 @@
                       buffer)))
 (add-hook 'compilation-finish-functions 'bury-compile-buffer-if-successful)
 ;; (79)
+;; Open both .cpp file and .hpp file on entering .cpp file name (80)
+(defun my-find-file ()
+  "Open both source file and header file"
+  (interactive)
+  (let* ((left-file (read-file-name "Enter .cpp file:"))
+         (right-file (concat (file-name-sans-extension left-file) ".hpp")))
+    (find-file left-file)
+    (find-file-other-window right-file))) 
+;; (80)
+;; prettify branch name in mode line (81)
+(advice-add #'vc-git-mode-line-string :filter-return #'my-replace-git-status)
+(defun my-replace-git-status (tstr)
+  (let* ((tstr (replace-regexp-in-string "Git" "" tstr))
+         (first-char (substring tstr 0 1))
+         (rest-chars (substring tstr 1)))
+    (cond 
+     ((string= ":" first-char) ;;; Modified
+      (replace-regexp-in-string "^:" "" tstr))
+     ((string= "-" first-char) ;; No change
+      (replace-regexp-in-string "^-" "" tstr))
+     (t tstr))))
+;; (81)
