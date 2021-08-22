@@ -265,6 +265,7 @@
  '(haskell-interactive-popup-errors nil)
  '(moody-mode-line-height 27)
  '(org-ellipsis "")
+ '(org-fontify-done-headline nil)
  '(org-html-head-include-default-style nil)
  '(org-startup-folded t)
  '(package-selected-packages
@@ -276,7 +277,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :extend nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 158 :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
+'(default ((t (:inherit nil :extend nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 158 :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
  '(dired-directory ((t (:foreground "cornflower blue"))))
  '(font-lock-builtin-face ((t (:foreground "gray"))))
  '(font-lock-comment-face ((t (:foreground "#7a7272"))))
@@ -427,3 +428,6 @@
       (replace-regexp-in-string "^-" "" tstr))
      (t tstr))))
 ;; (81)
+;; set encoding to UTF-8 - Fixes weird characters in gcc compilation buffer (82)
+(set-language-environment "UTF-8") 
+;; (82)
