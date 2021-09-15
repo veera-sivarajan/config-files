@@ -9,9 +9,9 @@ function wtr() {
 }
 
 # various aliases to quickly access important directory
-alias cl='cd /home/veera/Classes/Spring21'
-alias 220='cd /home/veera/Classes/Spring21/220'
-alias 311='cd /home/veera/Classes/Spring21/311'
+alias cl='cd /home/veera/Classes/'
+alias 377='cd /home/veera/Classes/F21/377'
+alias 311='cd /home/veera/Classes/F21/311'
 alias proj='cd /home/veera/Projects'
 alias t='cd /home/veera/Projects/Test' # alias to go straight into test dir
 alias e='exit' # alias to quickly exit terminal
@@ -19,7 +19,7 @@ alias books='cd /home/veera/Books'
 alias lock='loginctl lock-session'
 alias edlab='ssh vsivarajan@elnux.cs.umass.edu'
 alias gs='git status' 
-alias blog='cd /home/veera/Projects/Blog/drafts'
+alias blog='cd /home/veera/Projects/Blog/local'
 alias lard='du -hs */ | sort -hr | head' # view 10 largest dirs in current dir 
 alias mr='make && make run' # make and run program
 alias mrv='make && make runv' # make and run program with valgrind
