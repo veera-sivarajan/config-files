@@ -12,6 +12,8 @@ function wtr() {
 alias cl='cd /home/veera/Classes/'
 alias 377='cd /home/veera/Classes/F21/377'
 alias 311='cd /home/veera/Classes/F21/311'
+alias 383='cd /home/veera/Classes/F21/383'
+alias 256='cd /home/veera/Classes/F21/256'
 alias proj='cd /home/veera/Projects'
 alias t='cd /home/veera/Projects/Test' # alias to go straight into test dir
 alias e='exit' # alias to quickly exit terminal

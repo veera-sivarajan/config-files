@@ -204,12 +204,12 @@
 (global-set-key (kbd "M-m") 'magit-status) 
 ;; end (37)
 ;; kill all buffers, windows and open dired in current directory (38)
-(defun kill-buffers-open-dired ()
+(defun kill-buffers-open-plan ()
   (interactive)
   (mapcar 'kill-buffer (buffer-list))
   (delete-other-windows) 
-  (dired ".")) 
-(global-set-key (kbd "<f8>") 'kill-buffers-open-dired) 
+  (find-file "/home/veera/Classes/F21/plan.org")) 
+(global-set-key (kbd "<f8>") 'kill-buffers-open-plan) 
 ;; end (38)
 ;; kbd to quickly switch back to haskell file (39)
 (defun back-to-file ()
@@ -276,13 +276,14 @@
    '(undo-tree ox-reveal org-plus-contrib swift-mode evil-cleverparens paredit htmlize markdown-mode slime rust-mode pdf-tools hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk))
  '(pdf-view-midnight-colors '("white" . "black"))
  '(python-shell-interpreter "python3")
- '(scheme-program-name "mit-scheme"))
+ '(scheme-program-name "mit-scheme")
+ '(send-mail-function 'mailclient-send-it))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :extend nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 158 :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
+'(default ((t (:inherit nil :extend nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 158 :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
  '(dired-directory ((t (:foreground "cornflower blue"))))
  '(font-lock-builtin-face ((t (:foreground "gray"))))
  '(font-lock-comment-face ((t (:foreground "#7a7272"))))
@@ -295,7 +296,7 @@
  '(mode-line-inactive ((t (:background "gray13" :foreground "gainsboro" :height 148))))
  '(org-ellipsis ((t (:foreground "gray100" :box nil :underline nil :slant italic :weight light :height 150 :width ultra-condensed))))
  '(org-level-1 ((t (:foreground "light sky blue"))))
- '(vertical-border ((((type x) (background dark)) (:foreground "gray18")))))
+ '(vertical-border ((((type x) (background dark)) (:foreground "gray18"))))) 
  
 ;; end (57)
 ;; function to open file in top window (58)
@@ -404,11 +405,11 @@
         (with-current-buffer buffer
           (goto-char 1)
           (search-forward "warning" nil t))))
-      (run-with-timer 1 nil
+      (run-with-timer 3 nil
                       (lambda (buf)
                         (bury-buffer buf)
                         (switch-to-prev-buffer (get-buffer-window buf) 'kill))
-                      buffer)))
+                      buffer))) 
 (add-hook 'compilation-finish-functions 'bury-compile-buffer-if-successful)
 ;; (79)
 ;; Open both .cpp file and .hpp file on entering .cpp file name (80)
@@ -436,3 +437,21 @@
 ;; set encoding to UTF-8 - Fixes weird characters in gcc compilation buffer (82)
 (set-language-environment "UTF-8") 
 ;; (82)
+(defun insert-rdate ()
+  (interactive)
+  (let ((rdate (format-time-string "%b %d, %G")))
+    (insert rdate))) 
+;;for rust
+;; remap o to open line below and indent (59)
+(defun rust-open-below-line ()
+  (interactive)
+  (evil-open-below 1)
+  (rust-mode-indent-line))  
+(evil-define-key 'normal rust-mode-map (kbd "o") 'rust-open-below-line)  
+;; end (59)
+;; remap O to open line above and indent (60)
+(defun my-open-above-line ()
+  (interactive)
+  (evil-open-above 1)
+  (rust-mode-indent-line)) 
+(evil-define-key 'normal rust-mode-map (kbd "O") 'my-open-above-line)  
