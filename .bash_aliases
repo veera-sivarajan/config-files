@@ -194,3 +194,8 @@ function comc () {
 function dl {
     python3 $(which youtube-dl) --extract-audio --audio-format mp3 $1
 }
+
+function rr {
+    rustc $1
+    ./$1
+}

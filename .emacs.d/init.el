@@ -256,47 +256,29 @@
 (global-set-key (kbd "C-c d") 'open-diary-file) 
 ;; end (56) 
 ;; all faces config (57)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(Man-coding-system 'utf-8)
- '(display-line-numbers-width nil)
- '(haskell-interactive-popup-errors nil)
- '(moody-mode-line-height 27)
- '(org-ellipsis "")
- '(org-fontify-done-headline nil)
- '(org-format-latex-options
-   '(:foreground default :background default :scale 2.0 :html-foreground "Black" :html-background "Transparent" :html-scale 1.0 :matchers
-                 ("begin" "$1" "$" "$$" "\\(" "\\[")))
- '(org-html-head-include-default-style nil)
- '(org-startup-folded t)
- '(package-selected-packages
-   '(undo-tree ox-reveal org-plus-contrib swift-mode evil-cleverparens paredit htmlize markdown-mode slime rust-mode pdf-tools hl-todo magit zenburn-theme vterm-toggle vimish-fold use-package spacemacs-theme solarized-theme nimbus-theme multi-term moody minions latex-preview-pane haskell-mode geiser evil dracula-theme doom-modeline auctex-latexmk))
- '(pdf-view-midnight-colors '("white" . "black"))
- '(python-shell-interpreter "python3")
- '(scheme-program-name "mit-scheme")
- '(send-mail-function 'mailclient-send-it))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-'(default ((t (:inherit nil :extend nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 158 :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
  '(dired-directory ((t (:foreground "cornflower blue"))))
  '(font-lock-builtin-face ((t (:foreground "gray"))))
  '(font-lock-comment-face ((t (:foreground "#7a7272"))))
+ '(font-lock-constant-face ((t (:foreground "#00bcff"))))
  '(font-lock-function-name-face ((t (:foreground "white"))))
  '(font-lock-keyword-face ((t (:foreground "cyan"))))
+ '(font-lock-preprocessor-face ((t (:inherit font-lock-builtin-face :foreground "#ff9077"))))
  '(font-lock-string-face ((t (:foreground "light sky blue"))))
+ '(font-lock-type-face ((t (:foreground "#6ae4b9"))))
+ '(font-lock-variable-name-face ((t (:foreground "#00d3d0"))))
  '(hl-todo ((t (:foreground "#cc9393" :slant italic :weight ultra-bold))))
  '(line-number-current-line ((t (:inherit line-number :foreground "gold"))))
  '(mode-line ((t (:background "gray28" :weight ultra-bold :height 148))))
  '(mode-line-inactive ((t (:background "gray13" :foreground "gainsboro" :height 148))))
  '(org-ellipsis ((t (:foreground "gray100" :box nil :underline nil :slant italic :weight light :height 150 :width ultra-condensed))))
  '(org-level-1 ((t (:foreground "light sky blue"))))
- '(vertical-border ((((type x) (background dark)) (:foreground "gray18"))))) 
+ '(vertical-border ((((type x) (background dark)) (:foreground "gray18")))))
+ 
  
 ;; end (57)
 ;; function to open file in top window (58)
@@ -455,3 +437,19 @@
   (evil-open-above 1)
   (rust-mode-indent-line)) 
 (evil-define-key 'normal rust-mode-map (kbd "O") 'my-open-above-line)  
+;; end (60)
+;; quickly open projects directory (61)
+(defun open-projects-dir ()
+  (interactive)
+  (message "open-projects-dir")
+  (find-file "/home/veera/Projects/"))
+(global-set-key (kbd "C-c C-p") 'open-projects-dir) 
+;; end (61)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(moody-mode-line-height 27)
+ '(org-fontify-done-headline nil)
+ '(org-startup-folded t))
