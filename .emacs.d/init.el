@@ -29,8 +29,7 @@
 ;; prettify org-mode (9)
 (add-to-list 'load-path "/home/veera/.emacs.d/org-bullets") ;; add dir to path
 (require 'org-bullets)
-(add-hook 'org-mode-hook (lambda ()
-			   (org-bullets-mode 1)))
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 ;; end (9)
 ;; disable line numbers for org-mode (10)
 (add-hook 'org-mode-hook (lambda () (linum-mode 0)))
@@ -74,12 +73,9 @@
     The insertion will be repeated COUNT times."
     (interactive "p")
     (evil-insert-newline-above)
-    (setq evil-insert-count count
-            evil-insert-lines t
-            evil-insert-vcount nil)
+    (setq evil-insert-count count evil-insert-lines t evil-insert-vcount nil)
     (evil-insert-state 1)
-    (add-hook 'post-command-hook #'evil-maybe-remove-spaces)
-    )
+    (add-hook 'post-command-hook #'evil-maybe-remove-spaces))
 ;; end (18)
 ;; display column number all the time (19)
 (setq column-number-mode t)
@@ -310,7 +306,7 @@
 (setq browse-url-browser-function 'browse-url-firefox) 
 ;; (76)
 ;; elisp function to insert date in a buffer in my preferred format (77)
-(defun get-date () (format-time-string "** %b %d, %G")) 
+(defun get-date () (format-time-string "** %b %d, %Y")) 
 (defun insert-date () 
   (interactive) 
   (insert (get-date))) 
@@ -362,7 +358,7 @@
 ;; (82)
 (defun insert-rdate ()
   (interactive)
-  (let ((rdate (format-time-string "%b %d, %G")))
+  (let ((rdate (format-time-string "%b %d, %Y")))
     (insert rdate))) 
 ;; rust mode remap o to open line below and indent (59)
 (defun rust-open-below-line ()
