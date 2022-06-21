@@ -52,7 +52,7 @@
 (show-paren-mode 1)
 ;; (15)
 ;; (16) set-face for highlighted region
-(set-face-foreground 'region "black")
+(set-face-foreground 'region "black") 
 (set-face-background 'region "white") 
 ;; end (16)
 ;; Fix for Haskell-evil bug on pressing 'o' (17)
@@ -167,7 +167,7 @@
   (interactive)
   (mapcar 'kill-buffer (buffer-list))
   (delete-other-windows) 
-  (find-file "/home/veera/Classes/F21/plan.org")) 
+  (find-file "/home/veera/Projects/rc/logs/log.org")) 
 (global-set-key (kbd "<f8>") 'kill-buffers-open-plan) 
 ;; end (38)
 ;; kbd to quickly switch back to haskell file (39)
@@ -306,7 +306,7 @@
 (setq browse-url-browser-function 'browse-url-firefox) 
 ;; (76)
 ;; elisp function to insert date in a buffer in my preferred format (77)
-(defun get-date () (format-time-string "** %b %d, %Y")) 
+(defun get-date () (format-time-string "%b %d, %Y")) 
 (defun insert-date () 
   (interactive) 
   (insert (get-date))) 
@@ -315,21 +315,22 @@
 (load-file "/home/veera/.emacs.d/scheme-config.el") 
 ;; (78)
 ;; Close compilation buffer automatically if success (79)
-(defun bury-compile-buffer-if-successful (buffer string)
-  "Bury a compilation buffer if succeeded without warnings "
-  (if (and
-       (string-match "compilation" (buffer-name buffer))
-       (string-match "finished" string)
-       (not
-        (with-current-buffer buffer
-          (goto-char 1)
-          (search-forward "warning" nil t))))
-      (run-with-timer 3 nil
-                      (lambda (buf)
-                        (bury-buffer buf)
-                        (switch-to-prev-buffer (get-buffer-window buf) 'kill))
-                      buffer))) 
-(add-hook 'compilation-finish-functions 'bury-compile-buffer-if-successful)
+;; copied from stackoverflow
+;; (defun bury-compile-buffer-if-successful (buffer string)
+;;   "Bury a compilation buffer if succeeded without warnings "
+;;   (if (and
+;;        (string-match "compilation" (buffer-name buffer))
+;;        (string-match "finished" string)
+;;        (not
+;;         (with-current-buffer buffer
+;;           (goto-char 1)
+;;           (search-forward "warning" nil t))))
+;;       (run-with-timer 3 nil
+;;                       (lambda (buf)
+;;                         (bury-buffer buf)
+;;                         (switch-to-prev-buffer (get-buffer-window buf) 'kill))
+;;                       buffer))) 
+;; (add-hook 'compilation-finish-functions 'bury-compile-buffer-if-successful)
 ;; (79)
 ;; Open both .cpp file and .hpp file on entering .cpp file name (80)
 (defun my-find-file ()
@@ -387,8 +388,17 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(moody-mode-line-height 27)
+ '(org-export-backends '(ascii html icalendar latex md odt))
  '(org-fontify-done-headline nil)
  '(org-html-head-include-default-style nil)
  '(org-startup-folded t)
  '(package-selected-packages
-   '(writeroom-mode use-package swift-mode shrink-path rust-mode pdf-tools paredit ox-reveal org-plus-contrib org-bullets moody modus-themes minions markdown-mode magit lox-mode latex-preview-pane kaolin-themes jq htmlize hl-todo haskell-mode evil all-the-icons)))
+   '(ox-json mini-modeline geiser-racket typescript-mode racket-mode multi-line writeroom-mode use-package swift-mode shrink-path rust-mode pdf-tools paredit ox-reveal org-plus-contrib org-bullets moody modus-themes minions markdown-mode magit lox-mode latex-preview-pane kaolin-themes jq htmlize hl-todo haskell-mode evil all-the-icons)))
+;; (62)
+(defun my/disable-scroll-bars (frame)
+  (modify-frame-parameters frame
+                           '((vertical-scroll-bars . nil)
+                             (horizontal-scroll-bars . nil)))) 
+(add-hook 'after-make-frame-functions 'my/disable-scroll-bars) 
+;;
+

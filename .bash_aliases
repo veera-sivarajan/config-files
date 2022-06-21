@@ -9,11 +9,12 @@ function wtr() {
 }
 
 # various aliases to quickly access important directory
-alias cl='cd /home/veera/Classes/'
-alias 377='cd /home/veera/Classes/F21/377'
-alias 311='cd /home/veera/Classes/F21/311'
-alias 383='cd /home/veera/Classes/F21/383'
-alias 256='cd /home/veera/Classes/F21/256'
+alias cl='cd /home/veera/Classes/S22'
+alias uca='cd /home/veera/Classes/S22/uca'
+alias 365='cd /home/veera/Classes/S22/digital-forensics'
+alias 410='cd /home/veera/Classes/S22/compilers'
+alias 453='cd /home/veera/Classes/S22/networking'
+alias 220='cd /home/veera/Classes/S22/220'
 alias proj='cd /home/veera/Projects'
 alias t='cd /home/veera/Projects/Test' # alias to go straight into test dir
 alias e='exit' # alias to quickly exit terminal
@@ -25,6 +26,7 @@ alias blog='cd /home/veera/Projects/Blog/local'
 alias lard='du -hs */ | sort -hr | head' # view 10 largest dirs in current dir 
 alias mr='make && make run' # make and run program
 alias mrv='make && make runv' # make and run program with valgrind
+alias donc='python3 /home/veera/Projects/Test/money.py'
 
 alias ld='ls -d */' # list all directories
 
@@ -198,4 +200,16 @@ function dl {
 function rr {
     rustc $1
     ./$1
+}
+
+music() {
+    cd /home/veera/Music/
+    cmus *.mp3
+}
+
+grade() {
+    content=`xclip -o -selected clipboard`
+    echo "$content"
+    xclip -o -selected clipboard > solve1.py
+    python3 solve1.py
 }
