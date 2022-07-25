@@ -393,12 +393,47 @@
  '(org-html-head-include-default-style nil)
  '(org-startup-folded t)
  '(package-selected-packages
-   '(ox-json mini-modeline geiser-racket typescript-mode racket-mode multi-line writeroom-mode use-package swift-mode shrink-path rust-mode pdf-tools paredit ox-reveal org-plus-contrib org-bullets moody modus-themes minions markdown-mode magit lox-mode latex-preview-pane kaolin-themes jq htmlize hl-todo haskell-mode evil all-the-icons)))
+   '(zig-mode bury-successful-compilation ox-json mini-modeline geiser-racket typescript-mode racket-mode multi-line writeroom-mode use-package swift-mode shrink-path rust-mode pdf-tools paredit ox-reveal org-plus-contrib org-bullets moody modus-themes minions markdown-mode magit lox-mode latex-preview-pane kaolin-themes jq htmlize hl-todo haskell-mode evil all-the-icons)))
 ;; (62)
+;; disable scroll bars in secondary frame opened using c-x-5-2
 (defun my/disable-scroll-bars (frame)
   (modify-frame-parameters frame
                            '((vertical-scroll-bars . nil)
                              (horizontal-scroll-bars . nil)))) 
 (add-hook 'after-make-frame-functions 'my/disable-scroll-bars) 
-;;
+;; (62)
+;; (63) keybinding to run `(rust-compile)` aka cargo build
+(add-hook 'rust-mode-hook
+          (lambda ()
+            (local-set-key (kbd "<f5>") #'rust-compile))) 
+(add-hook 'rust-mode-hook
+          (lambda ()
+            (local-set-key (kbd "<f6>") #'rust-run-clippy))) 
+(add-hook 'rust-mode-hook
+          (lambda ()
+            (local-set-key (kbd "<f7>") #'rust-test))) 
+;; (63)
+;; (64) install this package
+(require 'bury-successful-compilation)
+;; (64)
+(put 'magit-diff-edit-hunk-commit 'disabled nil)
 
+
+;; ease compilation
+;; (require 'compile)
+;; this means hitting the compile button always saves the buffer
+(setq mode-compile-always-save-buffer-p t)
+(setq compilation-ask-about-save nil)
+(setq compilation-window-height 12)
+(setq compilation-read-command nil)
+
+;; from enberg on #emacs
+(setq compilation-finish-function
+      (lambda (buf str)
+    (if (null (string-match ".*exited abnormally.*" str))
+        ;;no errors, make the compilation window go away in a few seconds
+        (progn
+          (run-at-time
+           "2 sec" nil 'delete-windows-on
+           (get-buffer-create "*compilation*"))
+          (message "No Compilation Errors!"))))) 
