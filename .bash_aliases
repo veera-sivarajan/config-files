@@ -9,7 +9,7 @@ function wtr() {
 }
 
 # various aliases to quickly access important directory
-alias cl='cd /home/veera/Classes/S22'
+alias cl='cd /home/veera/Classes/f22'
 alias uca='cd /home/veera/Classes/S22/uca'
 alias 365='cd /home/veera/Classes/S22/digital-forensics'
 alias 410='cd /home/veera/Classes/S22/compilers'
@@ -26,7 +26,6 @@ alias blog='cd /home/veera/Projects/Blog/local'
 alias lard='du -hs */ | sort -hr | head' # view 10 largest dirs in current dir 
 alias mr='make && make run' # make and run program
 alias mrv='make && make runv' # make and run program with valgrind
-alias donc='python3 /home/veera/Projects/Test/money.py'
 
 alias ld='ls -d */' # list all directories
 
@@ -203,7 +202,7 @@ function rr {
 }
 
 music() {
-    cd /home/veera/Music/
+    cd /home/veera/music/
     cmus *.mp3
 }
 

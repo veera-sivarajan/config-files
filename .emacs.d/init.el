@@ -167,7 +167,7 @@
   (interactive)
   (mapcar 'kill-buffer (buffer-list))
   (delete-other-windows) 
-  (find-file "/home/veera/Projects/rc/logs/log.org")) 
+  (find-file "/home/veera/Classes/f22/plan.org")) 
 (global-set-key (kbd "<f8>") 'kill-buffers-open-plan) 
 ;; end (38)
 ;; kbd to quickly switch back to haskell file (39)
@@ -218,7 +218,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :extend nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 158 :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
+ '(default ((t (:inherit nil :extend nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 155 :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
  '(dired-directory ((t (:foreground "cornflower blue"))))
  '(font-lock-builtin-face ((t (:foreground "gray"))))
  '(font-lock-comment-face ((t (:foreground "#7a7272"))))
@@ -387,13 +387,17 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
+ '(custom-safe-themes
+   '("e266d44fa3b75406394b979a3addc9b7f202348099cfde69e74ee6432f781336" default))
  '(moody-mode-line-height 27)
  '(org-export-backends '(ascii html icalendar latex md odt))
  '(org-fontify-done-headline nil)
  '(org-html-head-include-default-style nil)
  '(org-startup-folded t)
  '(package-selected-packages
-   '(zig-mode bury-successful-compilation ox-json mini-modeline geiser-racket typescript-mode racket-mode multi-line writeroom-mode use-package swift-mode shrink-path rust-mode pdf-tools paredit ox-reveal org-plus-contrib org-bullets moody modus-themes minions markdown-mode magit lox-mode latex-preview-pane kaolin-themes jq htmlize hl-todo haskell-mode evil all-the-icons)))
+   '(tree-sitter-langs tree-sitter web-mode zig-mode bury-successful-compilation ox-json mini-modeline geiser-racket typescript-mode racket-mode multi-line writeroom-mode use-package swift-mode shrink-path rust-mode pdf-tools paredit ox-reveal org-plus-contrib org-bullets moody modus-themes minions markdown-mode magit lox-mode latex-preview-pane kaolin-themes jq htmlize hl-todo haskell-mode evil all-the-icons)))
 ;; (62)
 ;; disable scroll bars in secondary frame opened using c-x-5-2
 (defun my/disable-scroll-bars (frame)
@@ -437,3 +441,15 @@
            "2 sec" nil 'delete-windows-on
            (get-buffer-create "*compilation*"))
           (message "No Compilation Errors!"))))) 
+;; set org mode as initial buffer
+(setq initial-major-mode 'org-mode)
+(defun define-word ()
+  "Google search the definition for word near point."
+  (interactive)
+  (browse-url (concat "https://www.google.com/search?q=define+" (current-word)))) 
+(add-hook 'org-mode-hook
+          (lambda () (local-set-key (kbd "C-;") 'define-word))) 
+;; dynamic headline numbering for all org files
+(setq org-startup-numerated t) 
+(put 'downcase-region 'disabled nil)
+;; tree sitter config
