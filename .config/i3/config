@@ -181,7 +181,7 @@ bar {
         output eDP-1
         position top
         font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-        font pango:DejaVu Sans Mono 12
+        font pango:DejaVu Sans Mono 15
         workspace_buttons no
 }
 
