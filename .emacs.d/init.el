@@ -1,4 +1,4 @@
-;; Haskell Mode (2)
+;;protocol  Haskell Mode (2)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 ;; end (2)
@@ -170,7 +170,7 @@
   (interactive)
   (mapcar 'kill-buffer (buffer-list))
   (delete-other-windows) 
-  (find-file "/home/veera/Classes/f22/plan.org")) 
+  (find-file "/home/veera/Classes/s23/plan.org")) 
 (global-set-key (kbd "<f8>") 'kill-buffers-open-plan) 
 ;; end (38)
 ;; kbd to quickly switch back to haskell file (39)
@@ -212,7 +212,7 @@
 ;; keybinding for opening diary (56)
 (defun open-diary-file ()
   (interactive)
-  (find-file "~/Diary.org")) 
+  (find-file "~/diary.org")) 
 (global-set-key (kbd "C-c d") 'open-diary-file) 
 ;; end (56) 
 ;; all faces config (57)
@@ -221,7 +221,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :extend nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 158 :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
+ '(default ((t (:inherit nil :extend nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 155 :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
  '(dired-directory ((t (:foreground "cornflower blue"))))
  '(font-lock-builtin-face ((t (:foreground "gray"))))
  '(font-lock-comment-face ((t (:foreground "#7a7272"))))
@@ -280,7 +280,7 @@
 ;; shortcut to open classes directory in dired mode (67)
 (defun open-classes ()
   (interactive)
-  (dired "/home/veera/Classes/Spring21")) 
+  (dired "/home/veera/Classes/s23")) 
 (global-set-key (kbd "C-c l") 'open-classes) 
 ;; (67)
 ;; disable fringe mode by default (70)
@@ -395,11 +395,13 @@
    '("e266d44fa3b75406394b979a3addc9b7f202348099cfde69e74ee6432f781336" default))
  '(moody-mode-line-height 27)
  '(org-export-backends '(ascii html icalendar latex md odt))
+ '(org-export-with-section-numbers t)
  '(org-fontify-done-headline nil)
+ '(org-fontify-whole-heading-line t)
  '(org-html-head-include-default-style nil)
  '(org-startup-folded t)
  '(package-selected-packages
-   '(lsp-ui lsp-mode rustic tree-sitter-langs tree-sitter web-mode zig-mode ox-json mini-modeline geiser-racket typescript-mode racket-mode multi-line writeroom-mode use-package swift-mode shrink-path rust-mode pdf-tools paredit ox-reveal org-plus-contrib org-bullets moody modus-themes minions markdown-mode magit lox-mode latex-preview-pane kaolin-themes jq htmlize hl-todo haskell-mode evil all-the-icons)))
+   '(ox-rss lsp-ui lsp-mode rustic tree-sitter-langs tree-sitter web-mode zig-mode ox-json mini-modeline geiser-racket typescript-mode racket-mode multi-line writeroom-mode use-package swift-mode shrink-path rust-mode pdf-tools paredit ox-reveal org-plus-contrib org-bullets moody modus-themes minions markdown-mode magit lox-mode latex-preview-pane kaolin-themes jq htmlize hl-todo haskell-mode evil all-the-icons)))
 ;; (62)
 ;; disable scroll bars in secondary frame opened using c-x-5-2
 (defun my/disable-scroll-bars (frame)
@@ -476,7 +478,7 @@
   ;; (setq lsp-signature-auto-activate nil)
 
   ;; comment to disable rustfmt on save
-  (setq rustic-format-on-save t)
+  ;; (setq rustic-format-on-save t)
   (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook)) 
 
 (defun rk/rustic-mode-hook ()
@@ -522,3 +524,13 @@
   (lsp-ui-peek-always-show t)
   (lsp-ui-sideline-show-hover t)
   (lsp-ui-doc-enable nil)) 
+
+(with-eval-after-load 'lsp-mode
+  (add-hook 'lsp-mode-hook
+     (lambda ()
+        (remove-hook 'before-save-hook #'lsp-format-buffer t)
+        (remove-hook 'before-save-hook #'lsp-organize-imports t))
+))
+
+;; config for highlighting hyperlinks in blue
+;; (setq org-latex-packages-alist '("\\hypersetup{colorlinks=true,linkcolor=blue}"))

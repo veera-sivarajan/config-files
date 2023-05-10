@@ -9,12 +9,17 @@ function wtr() {
 }
 
 # various aliases to quickly access important directory
-alias cl='cd /home/veera/Classes/f22'
+alias cl='cd /home/veera/Classes/s23'
 alias uca='cd /home/veera/Classes/S22/uca'
 alias 365='cd /home/veera/Classes/S22/digital-forensics'
 alias 410='cd /home/veera/Classes/S22/compilers'
 alias 453='cd /home/veera/Classes/S22/networking'
 alias 220='cd /home/veera/Classes/S22/220'
+alias 325='cd /home/veera/Classes/s23/hci'
+alias 151='cd /home/veera/Classes/s23/physics'
+alias 373='cd /home/veera/Classes/s23/graphics'
+alias 305='cd /home/veera/Classes/s23/writing'
+alias 491='cd /home/veera/Classes/s23/networking'
 alias proj='cd /home/veera/Projects'
 alias t='cd /home/veera/Projects/Test' # alias to go straight into test dir
 alias e='exit' # alias to quickly exit terminal
@@ -26,6 +31,9 @@ alias blog='cd /home/veera/Projects/Blog/local'
 alias lard='du -hs */ | sort -hr | head' # view 10 largest dirs in current dir 
 alias mr='make && make run' # make and run program
 alias mrv='make && make runv' # make and run program with valgrind
+alias car='cargo run'
+alias cab='cargo build'
+alias pap='cd /home/veera/Books/papers/pl'
 
 alias ld='ls -d */' # list all directories
 
