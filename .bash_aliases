@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # load thirukural script to shell
-source ~/Projects/.ThirukkuralAPI/src/kural.sh
+source ~/projects/.ThirukkuralAPI/src/kural.sh
 
 # command to check weather
 function wtr() {
@@ -9,31 +9,31 @@ function wtr() {
 }
 
 # various aliases to quickly access important directory
-alias cl='cd /home/veera/Classes/s23'
-alias uca='cd /home/veera/Classes/S22/uca'
-alias 365='cd /home/veera/Classes/S22/digital-forensics'
-alias 410='cd /home/veera/Classes/S22/compilers'
-alias 453='cd /home/veera/Classes/S22/networking'
-alias 220='cd /home/veera/Classes/S22/220'
-alias 325='cd /home/veera/Classes/s23/hci'
-alias 151='cd /home/veera/Classes/s23/physics'
-alias 373='cd /home/veera/Classes/s23/graphics'
-alias 305='cd /home/veera/Classes/s23/writing'
-alias 491='cd /home/veera/Classes/s23/networking'
-alias proj='cd /home/veera/Projects'
-alias t='cd /home/veera/Projects/Test' # alias to go straight into test dir
+alias cl='cd /home/veera/classes/s23'
+alias uca='cd /home/veera/classes/s22/uca'
+alias 365='cd /home/veera/classes/s22/digital-forensics'
+alias 410='cd /home/veera/classes/s22/compilers'
+alias 453='cd /home/veera/classes/s22/networking'
+alias 220='cd /home/veera/classes/s22/220'
+alias 325='cd /home/veera/classes/s23/hci'
+alias 151='cd /home/veera/classes/s23/physics'
+alias 373='cd /home/veera/classes/s23/graphics'
+alias 305='cd /home/veera/classes/s23/writing'
+alias 491='cd /home/veera/classes/s23/networking'
+alias proj='cd /home/veera/projects'
+alias t='cd /home/veera/projects/test' # alias to go straight into test dir
 alias e='exit' # alias to quickly exit terminal
-alias books='cd /home/veera/Books'
+alias books='cd /home/veera/books'
 alias lock='loginctl lock-session'
 alias edlab='ssh vsivarajan@elnux.cs.umass.edu'
 alias gs='git status' 
-alias blog='cd /home/veera/Projects/Blog/local'
+alias blog='cd /home/veera/projects/blog/local'
 alias lard='du -hs */ | sort -hr | head' # view 10 largest dirs in current dir 
 alias mr='make && make run' # make and run program
 alias mrv='make && make runv' # make and run program with valgrind
 alias car='cargo run'
 alias cab='cargo build'
-alias pap='cd /home/veera/Books/papers/pl'
+alias pap='cd /home/veera/books/papers/pl'
 
 alias ld='ls -d */' # list all directories
 
@@ -62,18 +62,6 @@ function bye() {
   qdbus org.kde.ksmserver /KSMServer logout 0 0 0
 }
 
-# execute vtags from ~/Projects/ 
-function vtags() {
-  path=$(pwd)
-  java -jar ~/Projects/vtags.jar $path/$1   
-}
-
-# compile and run java source code 
-function j() {
-  javac $1.java
-  java $1
-}
-
 # git add all files and commit 
 function gac() {
   git add .
@@ -83,32 +71,14 @@ function gac() {
 # alias for adding dotfiles to git
 alias dfiles='/usr/bin/git --git-dir=$HOME/.files/ --work-tree=$HOME'
 
-# shortened command for executing python3 programs quickly
-function p() {
-  python3 "$1"
-}
-
 # short command to add and commit all dot files
 function dfg() {
-  dfiles add .bash_aliases
-  dfiles add .bashrc
-  dfiles add .vimrc
-  dfiles commit 
+  dfiles add /home/veera/.bash_aliases
+  dfiles add /home/veera/.bashrc
+  dfiles add /home/veera/.emacs.d/init.el
+  dfiles commit -m "$1"
   dfiles push -u origin master
 }
-
-# git and commit Emacs init file
-function edfg() {
-    cd ~/.emacs.d
-    dfiles add init.el
-    dfiles commit
-    dfiles push -u origin master
-    cd
-}
-
-# script for jekyll installs Ruby Gems to ~/gems
-export GEM_HOME="$HOME/gems"
-export PATH="$HOME/gems/bin:$PATH"
 
 # function to send files from local to edlab
 function sendfile() {
@@ -119,11 +89,6 @@ function sendfile() {
 function getfile() {
     scp -r vsivarajan@elnux.cs.umass.edu:$1 /home/veera/$2
 }
-
-# quickly ssh into edlab
- #function edlab() {
-#   ssh vsivarajan@elnux.cs.umass.edu
-#}
 
 # quickly compile and execute C programs
 function crun() {
@@ -182,11 +147,11 @@ function hiso () {
 function dstat () {
     if [ $# -eq 0 ] # if no arguments 
     then
-        file='/home/veera/Diary.org'
+        file='/home/veera/diary.org'
     else
         file=$1
     fi
-    temp=$(sed -n '/^*/p' "$file" | tail -n +2 | awk '{ print $2 }' | uniq -c | awk '{t=$1; $1=$2; $2=t; print;}')
+    temp=$(sed -n '/^* /p' "$file" | tail -n +2 | awk '{ print $2 }' | uniq -c | awk '{t=$1; $1=$2; $2=t; print;}')
     echo "$temp"
     total=$(echo "$temp" | awk '{s+=$2} END {print s}')
     echo "---------------"
@@ -209,14 +174,7 @@ function rr {
     ./$1
 }
 
-music() {
+function music() {
     cd /home/veera/music/
     cmus *.mp3
-}
-
-grade() {
-    content=`xclip -o -selected clipboard`
-    echo "$content"
-    xclip -o -selected clipboard > solve1.py
-    python3 solve1.py
 }

@@ -170,7 +170,7 @@
   (interactive)
   (mapcar 'kill-buffer (buffer-list))
   (delete-other-windows) 
-  (find-file "/home/veera/Classes/s23/plan.org")) 
+  (find-file "/home/veera/classes/s23/plan.org")) 
 (global-set-key (kbd "<f8>") 'kill-buffers-open-plan) 
 ;; end (38)
 ;; kbd to quickly switch back to haskell file (39)
@@ -221,7 +221,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :extend nil :stipple nil :background "black" :foreground "#eff0f1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 155 :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
+ '(default ((t (:inherit nil :extend nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 158 :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
  '(dired-directory ((t (:foreground "cornflower blue"))))
  '(font-lock-builtin-face ((t (:foreground "gray"))))
  '(font-lock-comment-face ((t (:foreground "#7a7272"))))
@@ -280,7 +280,7 @@
 ;; shortcut to open classes directory in dired mode (67)
 (defun open-classes ()
   (interactive)
-  (dired "/home/veera/Classes/s23")) 
+  (dired "/home/veera/classes/s23")) 
 (global-set-key (kbd "C-c l") 'open-classes) 
 ;; (67)
 ;; disable fringe mode by default (70)
@@ -381,7 +381,7 @@
 (defun open-projects-dir ()
   (interactive)
   (message "open-projects-dir")
-  (find-file "/home/veera/Projects/"))
+  (find-file "/home/veera/projects/"))
 (global-set-key (kbd "C-c C-p") 'open-projects-dir) 
 ;; end (61)
 (custom-set-variables
@@ -534,3 +534,8 @@
 
 ;; config for highlighting hyperlinks in blue
 ;; (setq org-latex-packages-alist '("\\hypersetup{colorlinks=true,linkcolor=blue}"))
+
+
+(add-to-list 'load-path "/home/veera/.emacs.d/elpa/yaml-mode") ;; add dir to path
+(require 'yaml-mode) 
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)) 
