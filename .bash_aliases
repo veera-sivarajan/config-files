@@ -151,7 +151,7 @@ function dstat () {
     else
         file=$1
     fi
-    temp=$(sed -n '/^* /p' "$file" | tail -n +2 | awk '{ print $2 }' | uniq -c | awk '{t=$1; $1=$2; $2=t; print;}')
+    temp=$(sed -n '/^* /p' "$file" | awk '{ print $2 }' | uniq -c | awk '{t=$1; $1=$2; $2=t; print;}')
     echo "$temp"
     total=$(echo "$temp" | awk '{s+=$2} END {print s}')
     echo "---------------"
@@ -177,4 +177,16 @@ function rr {
 function music() {
     cd /home/veera/music/
     cmus *.mp3
+}
+
+function audio_length {
+    ffmpeg -i $1 2>&1 | egrep "Duration" |  cut -d ' ' -f 4 | sed s/,//
+}
+    
+function minfo() {
+    for file in /home/veera/music/*.mp3
+    do
+        len=$(audio_length $file)
+        echo -e $file $len
+    done
 }
