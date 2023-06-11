@@ -151,12 +151,20 @@ function dstat () {
     else
         file=$1
     fi
+    count=$(wc "$file")
     temp=$(sed -n '/^* /p' "$file" | awk '{ print $2 }' | uniq -c | awk '{t=$1; $1=$2; $2=t; print;}')
     echo "$temp"
-    total=$(echo "$temp" | awk '{s+=$2} END {print s}')
-    echo "---------------"
-    echo "Total: $total"
-    echo "---------------"
+    total_entries=$(echo "$temp" | awk '{s+=$2} END {print s}')
+    total_lines=$(echo "$count" | awk '{ print $1 }')
+    total_words=$(echo "$count" | awk '{ print $2 }')
+    avg_word_count=$(echo "$total_words / $total_entries" | bc)
+    echo "----------------------------------------------"
+    echo "Total: $total_entries entries"
+    echo "       $total_lines lines"
+    echo "       $total_words words"
+    echo "                         "
+    echo "On an average $avg_word_count words per entry."
+    echo "----------------------------------------------"
 }
     
 # display total number of commits in a repo
