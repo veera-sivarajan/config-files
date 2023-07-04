@@ -34,8 +34,9 @@ alias mrv='make && make runv' # make and run program with valgrind
 alias car='cargo run'
 alias cab='cargo build'
 alias pap='cd /home/veera/books/papers/pl'
+alias casm='gcc -O0 -fverbose-asm -S'
 
-alias ld='ls -d */' # list all directories
+# alias ld='ls -d */' # list all directories
 
 # create directory and cd into it
 function mcd() {  
@@ -154,9 +155,9 @@ function dstat () {
     count=$(wc "$file")
     temp=$(sed -n '/^* /p' "$file" | awk '{ print $2 }' | uniq -c | awk '{t=$1; $1=$2; $2=t; print;}')
     echo "$temp"
-    total_entries=$(echo "$temp" | awk '{s+=$2} END {print s}')
-    total_lines=$(echo "$count" | awk '{ print $1 }')
-    total_words=$(echo "$count" | awk '{ print $2 }')
+    total_entries=$(echo -n "$temp" | awk '{s+=$2} END {print s}')
+    total_lines=$(echo -n "$count" | awk '{ print $1 }')
+    total_words=$(echo -n "$count" | awk '{ print $2 }')
     avg_word_count=$(echo "$total_words / $total_entries" | bc)
     echo "----------------------------------------------"
     echo "Total: $total_entries entries"
@@ -174,7 +175,7 @@ function comc () {
 
 # download audio from Youtube using youtube-dl
 function dl {
-    python3 $(which youtube-dl) --extract-audio --audio-format mp3 $1
+    python3 $(which youtube-dl) -U --extract-audio --audio-format mp3 $1
 }
 
 function rr {
