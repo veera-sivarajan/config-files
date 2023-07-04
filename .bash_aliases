@@ -46,8 +46,8 @@ function mcd() {
 
 # change directory and list the current directory
 function cdl() {   
-  cd $1
-  ls
+    cd $1
+    ls
 }
 
 # display last 3 directories in prompt
@@ -55,18 +55,18 @@ PROMPT_DIRTRIM=3
 
 # copy working directory address to clipboard 
 function cwd() {
-  pwd | xclip -selection clipboard
+    pwd | xclip -selection clipboard
 }
 
 # log off command for KDE5 Plasma
 function bye() {
-  qdbus org.kde.ksmserver /KSMServer logout 0 0 0
+    qdbus org.kde.ksmserver /KSMServer logout 0 0 0
 }
 
 # git add all files and commit 
 function gac() {
-  git add .
-  git commit -m "$1"
+    git add .
+    git commit -m "$1"
 }
 
 # alias for adding dotfiles to git
@@ -74,11 +74,11 @@ alias dfiles='/usr/bin/git --git-dir=$HOME/.files/ --work-tree=$HOME'
 
 # short command to add and commit all dot files
 function dfg() {
-  dfiles add /home/veera/.bash_aliases
-  dfiles add /home/veera/.bashrc
-  dfiles add /home/veera/.emacs.d/init.el
-  dfiles commit -m "$1"
-  dfiles push -u origin master
+    dfiles add /home/veera/.bash_aliases
+    dfiles add /home/veera/.bashrc
+    dfiles add /home/veera/.emacs.d/init.el
+    dfiles commit -m "$1"
+    dfiles push -u origin master
 }
 
 # function to send files from local to edlab
@@ -104,14 +104,14 @@ function emb() {
 
 # open anything using desired programs and push it to background           
 function open () {
-  xdg-open $1
+    xdg-open $1
 }
 
 # display battery details
 function bat () {
     upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "state|to\ full|percentage"
 }
-    
+
 # open a file in already running Emacs instance
 function ff () {
     is_open=`ps -fe | grep "/usr/bin/emacs" | grep -vc grep`
@@ -137,7 +137,7 @@ function dff () {
     emacsclient -e '(progn (split-down-and-switch))'
     ff $1
 }
-    
+
 
 # command to get the top 10 commands from history
 function hiso () {
@@ -167,7 +167,7 @@ function dstat () {
     echo "On an average $avg_word_count words per entry."
     echo "----------------------------------------------"
 }
-    
+
 # display total number of commits in a repo
 function comc () {
     git log --format='%an' | sort | uniq -c | awk '{s+=$1} END {printf "%.0f\n", s}'
@@ -191,7 +191,7 @@ function music() {
 function audio_length {
     ffmpeg -i $1 2>&1 | egrep "Duration" |  cut -d ' ' -f 4 | sed s/,//
 }
-    
+
 function minfo() {
     for file in /home/veera/music/*.mp3
     do
