@@ -130,3 +130,7 @@ HISTCONTROL=ignoreboth
 PROMPT_COMMAND='history -a'
 source "$HOME/.cargo/env"
 . "$HOME/.cargo/env"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH=$BUN_INSTALL/bin:$PATH

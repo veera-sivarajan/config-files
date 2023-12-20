@@ -199,3 +199,5 @@ function minfo() {
         echo -e $file $len
     done
 }
+
+export LD_LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/10/
