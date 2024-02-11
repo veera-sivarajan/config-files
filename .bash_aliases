@@ -9,7 +9,7 @@ function wtr() {
 }
 
 # various aliases to quickly access important directory
-alias cl='cd /home/veera/classes/s23'
+alias cl='cd /home/veera/classes/s24'
 alias uca='cd /home/veera/classes/s22/uca'
 alias 365='cd /home/veera/classes/s22/digital-forensics'
 alias 410='cd /home/veera/classes/s22/compilers'
