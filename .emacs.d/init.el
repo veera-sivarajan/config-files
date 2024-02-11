@@ -413,13 +413,13 @@
 ;; (63) keybinding to run `(rust-compile)` aka cargo build
 (add-hook 'rust-mode-hook
           (lambda ()
-            (local-set-key (kbd "<f5>") #'rust-compile))) 
+            (local-set-key (kbd "<f5>") #'rustic-compile))) 
 (add-hook 'rust-mode-hook
           (lambda ()
-            (local-set-key (kbd "<f6>") #'rust-run-clippy))) 
+            (local-set-key (kbd "<f6>") #'rustic-cargo-check))) 
 (add-hook 'rust-mode-hook
           (lambda ()
-            (local-set-key (kbd "<f7>") #'rust-test))) 
+            (local-set-key (kbd "<f7>") #'rustic-cargo-test))) 
 ;; (63)
 ;; (64) install this package
 ;; (64)
@@ -539,3 +539,11 @@
 (add-to-list 'load-path "/home/veera/.emacs.d/elpa/yaml-mode") ;; add dir to path
 (require 'yaml-mode) 
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)) 
+;; custom compile command to find make file in parent directory
+;; copied from https://emacs.stackexchange.com/questions/20954/compile-from-parent-directory-in-emacs
+(defun compile-project ()
+  (interactive)
+  (let* ((mk-dir (locate-dominating-file (buffer-file-name) "Makefile"))
+         (compile-command (concat "make -k -s -C " (shell-quote-argument mk-dir)))
+         (compilation-read-command nil))
+    (call-interactively 'compile))) 
