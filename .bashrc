@@ -12,12 +12,21 @@ esac
 # See bash(1) for more options
 HISTCONTROL=ignoreboth:erasedups
 
+# record timestamps
+HISTTIMEFORMAT="%d/%m/%y %T "
+
+# allow a larger history file
+HISTFILESIZE=1000000
+HISTSIZE=1000000
+
+# prevent commnads starting with a space from going into history
+HISTCONTROL=ignoreboth
+
+# store history immediately
+PROMPT_COMMAND='history -a'
+
 # append to the history file, don't overwrite it
 shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -62,16 +71,16 @@ else
     # PS1='${debian_chroot:+($debian_chroot)}\$ '
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\[\033[00m\]\[\033[01;34m\]\w\[\033[00m\]\$ '
 fi
-unset color_prompt force_color_prompt
+# unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
+# case "$TERM" in
+# xterm*|rxvt*)
+#     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u\a\]$PS1"
+#     ;;
+# *)
+#     ;;
+# esac
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -116,18 +125,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# record timestamps
-HISTTIMEFORMAT="%d/%m/%y %T "
-
-# allow a larger history file
-HISTFILESIZE=1000000
-HISTSIZE=1000000
-
-# prevent commnads starting with a space from going into history
-HISTCONTROL=ignoreboth
-
-# store history immediately
-PROMPT_COMMAND='history -a'
 source "$HOME/.cargo/env"
 . "$HOME/.cargo/env"
 
