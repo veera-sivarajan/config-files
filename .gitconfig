@@ -1,0 +1,26 @@
+[user]
+	email = sveera.2001@gmail.com
+	name = Veera 
+[core]
+	editor = vim
+[status]
+	showUntrackedFiles = all
+[init]
+        defaultBranch = main
+[push]
+        autosetupremote = true
+[merge]
+        conflictstyle = zdiff3
+[diff]
+        algorithm = histogram
+        submodule = log
+[transfer]
+        fsckobjects = true
+[fetch]
+        fsckobjects = true
+[receive]
+        fsckobjects = true
+[status]
+        submoduleSummary = true
+[submodule]
+        recurse = true
