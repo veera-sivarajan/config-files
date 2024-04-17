@@ -181,9 +181,13 @@ function dl {
     python3 $(which youtube-dl) -U --extract-audio --audio-format mp3 $1
 }
 
+# copy the rust code from clipboard into a file and execute it
 function rr {
-    rustc $1
-    ./$1
+    output_file='/home/veera/projects/test/clipboard.rs'
+    xclip -selection clipboard -o > $output_file
+    echo -e "\nfn main() {}" >> $output_file
+    rustc $output_file
+    # .~/projects/test/clipboard
 }
 
 function music() {
