@@ -54,25 +54,25 @@
 ;; end (16)
 ;; Fix for Haskell-evil bug on pressing 'o' (17)
 (defun evil-open-below (count)
-    "Insert a new line below point and switch to Insert state.
+  "Insert a new line below point and switch to Insert state.
     The insertion will be repeated COUNT times."
-    (interactive "p")
-    (evil-insert-newline-below)
-    (setq evil-insert-count count
-            evil-insert-lines t
-            evil-insert-vcount nil)
-    (evil-insert-state 1)
-    (add-hook 'post-command-hook #'evil-maybe-remove-spaces))
+  (interactive "p")
+  (evil-insert-newline-below)
+  (setq evil-insert-count count
+        evil-insert-lines t
+        evil-insert-vcount nil)
+  (evil-insert-state 1)
+  (add-hook 'post-command-hook #'evil-maybe-remove-spaces))
 ;; end (17)
 ;; Fix for Haskell-evil bug on pressing 'O' (18)
 (defun evil-open-above (count)
-    "Insert a new line above point and switch to Insert state.
+  "Insert a new line above point and switch to Insert state.
     The insertion will be repeated COUNT times."
-    (interactive "p")
-    (evil-insert-newline-above)
-    (setq evil-insert-count count evil-insert-lines t evil-insert-vcount nil)
-    (evil-insert-state 1)
-    (add-hook 'post-command-hook #'evil-maybe-remove-spaces))
+  (interactive "p")
+  (evil-insert-newline-above)
+  (setq evil-insert-count count evil-insert-lines t evil-insert-vcount nil)
+  (evil-insert-state 1)
+  (add-hook 'post-command-hook #'evil-maybe-remove-spaces))
 ;; end (18)
 ;; display column number all the time (19)
 (setq column-number-mode t)
@@ -160,10 +160,10 @@
 (setq ido-ignore-buffers '("^ " "*Completions*" "*Shell Command Output*" "*Messages*" "Terminal" "*Help*" "GNU Emacs" "*Backtrace*"))
 ;; end (33)
 ;; fix for magit (36)
- (setq magit-process-password-prompt-regexps '("^\r?\\(Enter \\)?[Pp]assphrase\\( for \\(RSA \\)?key '.*'\\)?: ?$" "^\\(Enter \\)?[Pp]assword\\( for '\\(https?://\\)?\\(?99:.*\\)'\\)?: ?$" "^.*'s password: ?$" "^Yubikey for .*: ?$" "^Enter PIN for .*: ?$"))
+;; (setq magit-process-password-prompt-regexps '("^\r?\\(Enter \\)?[Pp]assphrase\\( for \\(RSA \\)?key '.*'\\)?: ?$" "^\\(Enter \\)?[Pp]assword\\( for '\\(https?://\\)?\\(?99:.*\\)'\\)?: ?$" "^.*'s password: ?$" "^Yubikey for .*: ?$" "^Enter PIN for .*: ?$"))
 ;; end (36)
 ;; set key binding for Magit-status (37)
-(global-set-key (kbd "M-m") 'magit-status) 
+;; (global-set-key (kbd "M-m") 'magit-status) 
 ;; end (37)
 ;; kill all buffers, windows and open dired in current directory (38)
 (defun kill-buffers-open-plan ()
@@ -178,7 +178,7 @@
   (interactive)
   (haskell-interactive-switch-back))
 (add-hook 'haskell-interactive-mode-hook (lambda ()
-			       (local-set-key (kbd "C-'") 'back-to-file)))
+			                   (local-set-key (kbd "C-'") 'back-to-file)))
 ;; end (39)
 ;; custom color for org TODO faces (40)
 (setq org-todo-keyword-faces
@@ -221,7 +221,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :extend nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 158 :width normal :foundry "DAMA" :family "Ubuntu Mono"))))
+ '(default ((t (:inherit nil :extend nil :stipple nil :background "black" :foreground 
+                         "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :s
+                         lant normal :weight normal :height 158 :width normal :foundry "DAMA" :family "Ubuntu Mo
+no"))))
  '(dired-directory ((t (:foreground "cornflower blue"))))
  '(font-lock-builtin-face ((t (:foreground "gray"))))
  '(font-lock-comment-face ((t (:foreground "#7a7272"))))
@@ -289,11 +292,6 @@
 ;; disable blink cursor mode (71)
 (blink-cursor-mode 0) 
 ;; (71)
-;; load all C files in minc mode (72)
-;; (load "/home/veera/Projects/Syntax-Highlight/highlight.el") 
-;; (add-to-list 'auto-mode-alist '("\\.c\\'" . minc-mode))
-;; (add-to-list 'auto-mode-alist '("\\.h\\'" . minc-mode))
-;; (72)
 ;; always start emacs in server mode (73)
 (server-start)
 ;; (73)
@@ -301,7 +299,7 @@
 (evil-ex-define-cmd "f[ind]" 'ido-find-file) 
 ;; (74)
 ;; list workflow states in ORG mode (75)
- (setq org-todo-keywords
+(setq org-todo-keywords
       '((sequence "TODO" "WORK" "|" "DONE"))) 
 ;; (75)
 ;; set firefox as default browser (76)
@@ -316,33 +314,6 @@
 ;; load all scheme config (78)
 (load-file "/home/veera/.emacs.d/scheme-config.el") 
 ;; (78)
-;; Close compilation buffer automatically if success (79)
-;; copied from stackoverflow
-;; (defun bury-compile-buffer-if-successful (buffer string)
-;;   "Bury a compilation buffer if succeeded without warnings "
-;;   (if (and
-;;        (string-match "compilation" (buffer-name buffer))
-;;        (string-match "finished" string)
-;;        (not
-;;         (with-current-buffer buffer
-;;           (goto-char 1)
-;;           (search-forward "warning" nil t))))
-;;       (run-with-timer 3 nil
-;;                       (lambda (buf)
-;;                         (bury-buffer buf)
-;;                         (switch-to-prev-buffer (get-buffer-window buf) 'kill))
-;;                       buffer))) 
-;; (add-hook 'compilation-finish-functions 'bury-compile-buffer-if-successful)
-;; (79)
-;; Open both .cpp file and .hpp file on entering .cpp file name (80)
-(defun my-find-file ()
-  "Open both source file and header file"
-  (interactive)
-  (let* ((left-file (read-file-name "Enter .cpp file:"))
-         (right-file (concat (file-name-sans-extension left-file) ".hpp")))
-    (find-file left-file)
-    (find-file-other-window right-file))) 
-;; (80)
 ;; prettify branch name in mode line (81)
 (advice-add #'vc-git-mode-line-string :filter-return #'my-replace-git-status)
 (defun my-replace-git-status (tstr)
@@ -401,7 +372,7 @@
  '(org-html-head-include-default-style nil)
  '(org-startup-folded t)
  '(package-selected-packages
-   '(ox-rss lsp-ui lsp-mode rustic tree-sitter-langs tree-sitter web-mode zig-mode ox-json mini-modeline geiser-racket typescript-mode racket-mode multi-line writeroom-mode use-package swift-mode shrink-path rust-mode pdf-tools paredit ox-reveal org-plus-contrib org-bullets moody modus-themes minions markdown-mode magit lox-mode latex-preview-pane kaolin-themes jq htmlize hl-todo haskell-mode evil all-the-icons)))
+   '(magit ox-rss lsp-ui lsp-mode rustic tree-sitter-langs tree-sitter web-mode zig-mode ox-json mini-modeline geiser-racket typescript-mode racket-mode multi-line writeroom-mode use-package swift-mode shrink-path rust-mode pdf-tools paredit ox-reveal org-plus-contrib org-bullets moody modus-themes minions markdown-mode lox-mode latex-preview-pane kaolin-themes jq htmlize hl-todo haskell-mode evil all-the-icons)))
 ;; (62)
 ;; disable scroll bars in secondary frame opened using c-x-5-2
 (defun my/disable-scroll-bars (frame)
@@ -437,13 +408,13 @@
 ;; from enberg on #emacs
 (setq compilation-finish-function
       (lambda (buf str)
-    (if (null (string-match ".*exited abnormally.*" str))
-        ;;no errors, make the compilation window go away in a few seconds
-        (progn
-          (run-at-time
-           "2 sec" nil 'delete-windows-on
-           (get-buffer-create "*compilation*"))
-          (message "No Compilation Errors!"))))) 
+        (if (null (string-match ".*exited abnormally.*" str))
+            ;;no errors, make the compilation window go away in a few seconds
+            (progn
+              (run-at-time
+               "2 sec" nil 'delete-windows-on
+               (get-buffer-create "*compilation*"))
+              (message "No Compilation Errors!"))))) 
 ;; set org mode as initial buffer
 (setq initial-major-mode 'org-mode)
 (defun define-word ()
@@ -514,6 +485,7 @@
   (lsp-signature-render-documentation nil)
   (lsp-signature-auto-activate nil)
   (lsp-completion-provider :none)
+  (lsp-modeline-code-actions-enable nil) 
   :config
   (add-hook 'lsp-mode-hook 'lsp-ui-mode)) 
 
@@ -527,18 +499,15 @@
 
 (with-eval-after-load 'lsp-mode
   (add-hook 'lsp-mode-hook
-     (lambda ()
-        (remove-hook 'before-save-hook #'lsp-format-buffer t)
-        (remove-hook 'before-save-hook #'lsp-organize-imports t))
-))
+            (lambda ()
+              (remove-hook 'before-save-hook #'lsp-format-buffer t)
+              (remove-hook 'before-save-hook #'lsp-organize-imports t))
+            ))
 
 ;; config for highlighting hyperlinks in blue
 ;; (setq org-latex-packages-alist '("\\hypersetup{colorlinks=true,linkcolor=blue}"))
 
 
-(add-to-list 'load-path "/home/veera/.emacs.d/elpa/yaml-mode") ;; add dir to path
-(require 'yaml-mode) 
-(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)) 
 ;; custom compile command to find make file in parent directory
 ;; copied from https://emacs.stackexchange.com/questions/20954/compile-from-parent-directory-in-emacs
 (defun compile-project ()
@@ -547,3 +516,10 @@
          (compile-command (concat "make -k -s -C " (shell-quote-argument mk-dir)))
          (compilation-read-command nil))
     (call-interactively 'compile))) 
+;; install magit
+(use-package magit
+  :ensure t
+  :bind (("M-m" . 'magit-status))
+  :config
+  (setq magit-process-password-prompt-regexps '("^\r?\\(Enter \\)?[Pp]assphrase\\( for \\(RSA \\)?key '.*'\\)?: ?$" "^\\(Enter \\)?[Pp]assword\\( for '\\(https?://\\)?\\(?99:.*\\)'\\)?: ?$" "^.*'s password: ?$" "^Yubikey for .*: ?$" "^Enter PIN for .*: ?$")))
+
