@@ -9,36 +9,36 @@ function wtr() {
 }
 
 # various aliases to quickly access important directory
-alias cl='cd /home/veera/classes/s24'
-alias uca='cd /home/veera/classes/s22/uca'
-alias 365='cd /home/veera/classes/s22/digital-forensics'
-alias 410='cd /home/veera/classes/s22/compilers'
-alias 453='cd /home/veera/classes/s22/networking'
-alias 220='cd /home/veera/classes/s22/220'
-alias 325='cd /home/veera/classes/s23/hci'
-alias 151='cd /home/veera/classes/s23/physics'
-alias 373='cd /home/veera/classes/s23/graphics'
-alias 305='cd /home/veera/classes/s23/writing'
-alias 491='cd /home/veera/classes/s23/networking'
-alias proj='cd /home/veera/projects'
-alias t='cd /home/veera/projects/test' # alias to go straight into test dir
-alias e='exit' # alias to quickly exit terminal
-alias books='cd /home/veera/books'
-alias lock='loginctl lock-session'
-alias edlab='ssh vsivarajan@elnux.cs.umass.edu'
-alias gs='git status' 
-alias blog='cd /home/veera/projects/blog/local'
-alias lard='du -hs */ | sort -hr | head' # view 10 largest dirs in current dir 
-alias mr='make && make run' # make and run program
-alias mrv='make && make runv' # make and run program with valgrind
-alias car='cargo run'
-alias cab='cargo build'
-alias pap='cd /home/veera/books/papers/pl'
-alias casm='gcc -O0 -fverbose-asm -S'
+alias cl="cd /home/veera/classes/s24"
+alias uca="cd /home/veera/classes/s22/uca"
+alias 365="cd /home/veera/classes/s22/digital-forensics"
+alias 410="cd /home/veera/classes/s22/compilers"
+alias 453="cd /home/veera/classes/s22/networking"
+alias 220="cd /home/veera/classes/s22/220"
+alias 325="cd /home/veera/classes/s23/hci"
+alias 151="cd /home/veera/classes/s23/physics"
+alias 373="cd /home/veera/classes/s23/graphics"
+alias 305="cd /home/veera/classes/s23/writing"
+alias 491="cd /home/veera/classes/s23/networking"
+alias proj="cd /home/veera/projects"
+alias t="cd /home/veera/projects/test" # alias to go straight into test dir
+alias e="exit" # alias to quickly exit terminal
+alias books="cd /home/veera/books"
+alias lock="loginctl lock-session"
+alias edlab="ssh vsivarajan@elnux.cs.umass.edu"
+alias gs="git status" 
+alias blog="cd /home/veera/projects/blog/local"
+alias lard="du -hs */ | sort -hr | head" # view 10 largest dirs in current dir 
+alias mr="make && make run" # make and run program
+alias mrv="make && make runv" # make and run program with valgrind
+alias car="cargo run"
+alias cab="cargo build"
+alias pap="cd /home/veera/books/papers/pl"
+alias casm="gcc -O0 -fverbose-asm -S"
 # quickly build stage 1 rust compiler while using existing std library
-alias rcb='./x build --stage 1 library --keep-stage-std 1'
+alias rcb="./x build --stage 1 library --keep-stage-std 1"
 # open a random wikipedia page on firefox
-alias wiki="https://en.wikipedia.org/wiki/Special:Random"
+alias wiki="firefox https://en.wikipedia.org/wiki/Special:Random"
 
 # alias ld='ls -d */' # list all directories
 
