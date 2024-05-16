@@ -8,53 +8,44 @@
   (package-install 'use-package))
 (eval-when-compile (require 'use-package))
 
-;; end (2)
 ;; disable menu bar, tool bar and scroll bar (3)
 (menu-bar-mode -1) ;; menu bar
 (tool-bar-mode -1) ;; tool bar
 (toggle-scroll-bar -1) ;; scroll bar
-;; end (3)
+
 ;; set font to Ubuntu Mono with size = 16 (4)
 (set-frame-font "Ubuntu Mono 16" nil t) 
-;; end (4)
-;; Evil Mode (5)
-;; end (5)
+
 ;; automatically enable visual-line-mode and org-indent-mode (8)
 (with-eval-after-load 'org
   (setq org-startup-indented t) ;; enables `org-indent-mode` by default
   (add-hook 'org-mode-hook #'visual-line-mode))
-;; end (8)
-;; end (9)
+
 ;; disable line numbers for org-mode (10)
 (add-hook 'org-mode-hook (lambda () (linum-mode 0)))
-;; end (10)
-;; end (14)
+
 ;; Always do syntax highlighting 
 (global-font-lock-mode 1)
 ;; highlight parens  (15)
 (setq show-paren-delay 0
       show-paren-style 'parenthesis)
 (show-paren-mode 1)
-;; (15)
-;; (16) set-face for highlighted region
+
 (set-face-foreground 'region "black") 
 (set-face-background 'region "white") 
-;; end (16)
-;; end (17)
+
 ;; display column number all the time (19)
 (setq column-number-mode t)
-;; end (19)
+
 ;; set location for all backup files (21)
 (setq backup-directory-alist '(("." . "~/.emacs-backup/")))
-;; end (21)
+
 ;; quickly open emacs config file (22)
 (defun open-config-file ()
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 (global-set-key (kbd "C-c e") 'open-config-file)
-;; end (22)
-;; disable evil-mode in terminal, haskell REPL, eshell and mit-scheme REPL (23)
-;; end (23)
+
 ;; split window and switch cursor (24)
 (defun split-down-and-switch ()
   "Split window horizontally, then switch to the new pane."
@@ -72,57 +63,20 @@
 
 (global-set-key (kbd "C-x 2") 'split-down-and-switch)
 (global-set-key (kbd "C-x 3") 'split-right-and-switch)
-;; end (24)
-;; prettify mode line using moody (25)
-(use-package moody
-  :ensure t
-  :config
-  (setq x-underline-at-descent-line t
-        moody-mode-line-height 30)
-  (moody-replace-mode-line-buffer-identification)
-  (moody-replace-vc-mode)) 
-;; end (25)
-;; hide minor modes (26)
-;; (setq minions-mode-line-lighter ""
-;;       minions-mode-line-delimiters '("" . "")) 
-;; (minions-mode 1)
-(use-package minions
-  :custom
-  (minions-mode-line-lighter "")
-  (minions-mode-line-delimiters '("" .""))
-  :config
-  (minions-mode 1)) 
-;; end (26)
-;; tramp setup (27)
-(require 'tramp)
-(setq tramp-default-method "ssh")
-;; end (27)
-;; quickly access edlab server files (28)
-;; end (28)
-;; number of tabs for C and C++ programming and braces in new line (29)
-(setq c-default-style "linux"
-      c-basic-offset 4)
-;; end (29)
+
 ;; add my credentials (30)
 (setq user-full-name "Veera Sivarajan"
       user-mail-address "sveera.2001@gmail.com")
-;; end (30)
+
 ;; custom frame title (31)
 (setq frame-title-format '("Emacs")) 
-;; end (31)
+
 ;; auto save on current file (32)
 (auto-save-visited-mode 1)
-;; end (32)
-;; enable ido-mode for quick buffer switch and set buffers to ignore (33)
+
 (ido-mode 1)
 (setq ido-ignore-buffers '("^ " "*Completions*" "*Shell Command Output*" "*Messages*" "Terminal" "*Help*" "GNU Emacs" "*Backtrace*"))
-;; end (33)
-;; fix for magit (36)
-;; (setq magit-process-password-prompt-regexps '("^\r?\\(Enter \\)?[Pp]assphrase\\( for \\(RSA \\)?key '.*'\\)?: ?$" "^\\(Enter \\)?[Pp]assword\\( for '\\(https?://\\)?\\(?99:.*\\)'\\)?: ?$" "^.*'s password: ?$" "^Yubikey for .*: ?$" "^Enter PIN for .*: ?$"))
-;; end (36)
-;; set key binding for Magit-status (37)
-;; (global-set-key (kbd "M-m") 'magit-status) 
-;; end (37)
+
 ;; kill all buffers, windows and open dired in current directory (38)
 (defun kill-buffers-open-plan ()
   (interactive)
@@ -130,44 +84,32 @@
   (delete-other-windows) 
   (find-file "/home/veera/classes/s23/plan.org")) 
 (global-set-key (kbd "<f8>") 'kill-buffers-open-plan) 
-;; end (38)
+
 ;; custom color for org TODO faces (40)
 (setq org-todo-keyword-faces
       '(("TODO" . "IndianRed1") ("WORK" . "azure1") ("DONE" . "SpringGreen1")))
-;; end (40)
+
 ;; inhibit GNU Emacs buffer on startup (44)
 (setq inhibit-startup-message t)
-;; end (44)
+
 ;; display a detailed list of files in dired mode (45)
 (setq dired-listing-switches "-goh") 
-;; end (45)
+
 ;; I don't like tabs (50)
 (setq-default indent-tabs-mode nil) 
-;; end (50)
-;; hide dot files in dired mode (52)
-;; use kbd "C-x M-o" to toggle display of hidden files
-(require 'dired-x) 
-(setq-default dired-omit-files-p t)  
-(setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))  
-;; end (52)
-;; end (54)
-;; end (55)
+
 ;; keybinding for opening diary (56)
 (defun open-diary-file ()
   (interactive)
   (find-file "~/diary.org")) 
 (global-set-key (kbd "C-c d") 'open-diary-file) 
-;; end (56) 
+
 ;; all faces config (57)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :extend nil :stipple nil :background "black" :foreground 
-                         "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :s
-                         lant normal :weight normal :height 158 :width normal :foundry "DAMA" :family "Ubuntu Mo
--no")))) 
  '(dired-directory ((t (:foreground "cornflower blue"))))
  '(font-lock-builtin-face ((t (:foreground "gray"))))
  '(font-lock-comment-face ((t (:foreground "#7a7272"))))
@@ -185,65 +127,46 @@
  '(org-ellipsis ((t (:foreground "gray100" :box nil :underline nil :slant italic :weight light :height 150 :width ultra-condensed))))
  '(org-level-1 ((t (:foreground "light sky blue"))))
  '(vertical-border ((((type x) (background dark)) (:foreground "gray18")))))
-;; end (57)
-;; function to open file in top window (58)
-;; end (60)
-;; hl-todo config (62)
+
 ;; change color for comments (66)
 (set-face-foreground 'font-lock-comment-face "#7a7272") 
-;; (66)
-;; (67)
+
 ;; disable fringe mode by default (70)
 (fringe-mode 0)
-;; (70)
+
 ;; disable blink cursor mode (71)
 (blink-cursor-mode 0) 
-;; (71)
+
 ;; always start emacs in server mode (73)
 (server-start)
-;; (73)
-;; vim like ex command for finding file (74)
-;; (74)
+
 ;; list workflow states in ORG mode (75)
 (setq org-todo-keywords
       '((sequence "TODO" "WORK" "|" "DONE"))) 
-;; (75)
+
 ;; set firefox as default browser (76)
 (setq browse-url-browser-function 'browse-url-firefox) 
-;; (76)
+
 ;; elisp function to insert date in a buffer in my preferred format (77)
 (defun get-date () (format-time-string "%b %d, %Y")) 
 (defun insert-date () 
   (interactive) 
   (insert (get-date))) 
-;; (77)
-;; load all scheme config (78)
-(load-file "/home/veera/.emacs.d/scheme-config.el") 
-;; (78)
+
 ;; prettify branch name in mode line (81)
-(advice-add #'vc-git-mode-line-string :filter-return #'my-replace-git-status)
-(defun my-replace-git-status (tstr)
-  (let* ((tstr (replace-regexp-in-string "Git" "" tstr))
-         (first-char (substring tstr 0 1))
-         (rest-chars (substring tstr 1)))
-    (cond 
-     ((string= ":" first-char) ;;; Modified
-      (replace-regexp-in-string "^:" "" tstr))
-     ((string= "-" first-char) ;; No change
-      (replace-regexp-in-string "^-" "" tstr))
-     (t tstr))))
+;; (advice-add #'vc-git-mode-line-string :filter-return #'my-replace-git-status)
+;; (defun my-replace-git-status (tstr)
+;;   (let* ((tstr (replace-regexp-in-string "Git" "" tstr))
+;;          (first-char (substring tstr 0 1))
+;;          (rest-chars (substring tstr 1)))
+;;     (cond 
+;;      ((string= ":" first-char) ;;; Modified
+;;       (replace-regexp-in-string "^:" "" tstr))
+;;      ((string= "-" first-char) ;; No change
+;;       (replace-regexp-in-string "^-" "" tstr))
+;;      (t tstr))))
 ;; (81)
-;; set encoding to UTF-8 - Fixes weird characters in gcc compilation buffer (82)
-(set-language-environment "UTF-8") 
-;; (82)
-(defun insert-rdate ()
-  (interactive)
-  (let ((rdate (format-time-string "%b %d, %Y")))
-    (insert rdate))) 
-;; rust mode remap o to open line below and indent (59)
-;; end (60)
-;; quickly open projects directory (61)
-;; end (61)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -262,38 +185,22 @@
  '(org-startup-folded t)
  '(package-selected-packages
    '(magit ox-rss lsp-ui lsp-mode rustic tree-sitter-langs tree-sitter web-mode zig-mode ox-json mini-modeline geiser-racket typescript-mode racket-mode multi-line writeroom-mode use-package swift-mode shrink-path rust-mode pdf-tools paredit ox-reveal org-plus-contrib org-bullets moody modus-themes minions markdown-mode lox-mode latex-preview-pane kaolin-themes jq htmlize hl-todo haskell-mode evil all-the-icons)))
-;; (62)
+
 ;; disable scroll bars in secondary frame opened using c-x-5-2
 (defun my/disable-scroll-bars (frame)
   (modify-frame-parameters frame
                            '((vertical-scroll-bars . nil)
                              (horizontal-scroll-bars . nil)))) 
 (add-hook 'after-make-frame-functions 'my/disable-scroll-bars) 
-;; (62)
-;; (63) keybinding to run `(rust-compile)` aka cargo build
-;; (63)
-;; (64) install this package
-;; (64)
-(put 'magit-diff-edit-hunk-commit 'disabled nil)
 
-
-;; ease compilation
-;; (require 'compile)
-;; this means hitting the compile button always saves the buffer
 ;; set org mode as initial buffer
 (setq initial-major-mode 'org-mode)
 ;; dynamic headline numbering for all org files
 (setq org-startup-numerated t) 
-(put 'downcase-region 'disabled nil)
-;; tree sitter config
+
 ;; display line numbers and set color to line numbers (1)
 (add-hook 'prog-mode-hook 'display-line-numbers-mode) 
-;; end (0)
-;; rustic mode - a better rust-mode
-;; (use-package rustic
-;;   :ensure t
-;; )
-;; custom compile command to find make file in parent directory
+
 ;; install magit
 (use-package magit
   :ensure t
@@ -315,3 +222,18 @@
   :config
   (org-bullets-mode 1)
   :hook (org-mode . org-bullets-mode))
+
+(use-package moody
+  :ensure t
+  :config
+  (setq x-underline-at-descent-line t
+        moody-mode-line-height 30)
+  (moody-replace-mode-line-buffer-identification)
+  (moody-replace-vc-mode)) 
+
+(use-package minions
+  :custom
+  (minions-mode-line-lighter "")
+  (minions-mode-line-delimiters '("" .""))
+  :config
+  (minions-mode 1)) 
