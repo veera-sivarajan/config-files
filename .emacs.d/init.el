@@ -1,6 +1,13 @@
-;;protocol  Haskell Mode (2)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(setq package-archives 
+      '(("melpa" . "https://melpa.org/packages/")
+        ("elpa" . "https://elpa.gnu.org/packages/")))
+
+(package-initialize)
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(eval-when-compile (require 'use-package))
+
 ;; end (2)
 ;; disable menu bar, tool bar and scroll bar (3)
 (menu-bar-mode -1) ;; menu bar
@@ -11,35 +18,16 @@
 (set-frame-font "Ubuntu Mono 16" nil t) 
 ;; end (4)
 ;; Evil Mode (5)
-(setq evil-mode-line-format nil) ;; disable evil-mode state indicator
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
-(require 'evil)
-(evil-mode 1)
 ;; end (5)
 ;; automatically enable visual-line-mode and org-indent-mode (8)
 (with-eval-after-load 'org
   (setq org-startup-indented t) ;; enables `org-indent-mode` by default
   (add-hook 'org-mode-hook #'visual-line-mode))
 ;; end (8)
-;; prettify org-mode (9)
-(add-to-list 'load-path "/home/veera/.emacs.d/org-bullets") ;; add dir to path
-(require 'org-bullets)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 ;; end (9)
 ;; disable line numbers for org-mode (10)
 (add-hook 'org-mode-hook (lambda () (linum-mode 0)))
 ;; end (10)
-;; save and load file for Hasekll mode (14)
-(defun haskell-mode-save-load-buffer ()
-  (interactive)
-  (evil-normal-state)
-  (save-buffer)
-  (haskell-process-load-file)
-  (haskell-interactive-switch))
-(add-hook 'haskell-mode-hook
-          (lambda () (local-set-key (kbd "C-;") 'haskell-mode-save-load-buffer)))
 ;; end (14)
 ;; Always do syntax highlighting 
 (global-font-lock-mode 1)
@@ -52,28 +40,7 @@
 (set-face-foreground 'region "black") 
 (set-face-background 'region "white") 
 ;; end (16)
-;; Fix for Haskell-evil bug on pressing 'o' (17)
-(defun evil-open-below (count)
-  "Insert a new line below point and switch to Insert state.
-    The insertion will be repeated COUNT times."
-  (interactive "p")
-  (evil-insert-newline-below)
-  (setq evil-insert-count count
-        evil-insert-lines t
-        evil-insert-vcount nil)
-  (evil-insert-state 1)
-  (add-hook 'post-command-hook #'evil-maybe-remove-spaces))
 ;; end (17)
-;; Fix for Haskell-evil bug on pressing 'O' (18)
-(defun evil-open-above (count)
-  "Insert a new line above point and switch to Insert state.
-    The insertion will be repeated COUNT times."
-  (interactive "p")
-  (evil-insert-newline-above)
-  (setq evil-insert-count count evil-insert-lines t evil-insert-vcount nil)
-  (evil-insert-state 1)
-  (add-hook 'post-command-hook #'evil-maybe-remove-spaces))
-;; end (18)
 ;; display column number all the time (19)
 (setq column-number-mode t)
 ;; end (19)
@@ -87,10 +54,6 @@
 (global-set-key (kbd "C-c e") 'open-config-file)
 ;; end (22)
 ;; disable evil-mode in terminal, haskell REPL, eshell and mit-scheme REPL (23)
-(evil-set-initial-state 'term-mode 'emacs)
-(evil-set-initial-state 'haskell-interactive-mode 'emacs)
-(evil-set-initial-state 'eshell-mode 'emacs)
-(evil-set-initial-state 'inferior-scheme-mode 'emacs) 
 ;; end (23)
 ;; split window and switch cursor (24)
 (defun split-down-and-switch ()
@@ -135,11 +98,6 @@
 (setq tramp-default-method "ssh")
 ;; end (27)
 ;; quickly access edlab server files (28)
-(defun open-edlab ()
-  "Opening edlab"
-  (interactive)
-  (find-file "/-:vsivarajan@elnux.cs.umass.edu:"))
-(global-set-key (kbd "C-c w") 'open-edlab)
 ;; end (28)
 ;; number of tabs for C and C++ programming and braces in new line (29)
 (setq c-default-style "linux"
@@ -173,13 +131,6 @@
   (find-file "/home/veera/classes/s23/plan.org")) 
 (global-set-key (kbd "<f8>") 'kill-buffers-open-plan) 
 ;; end (38)
-;; kbd to quickly switch back to haskell file (39)
-(defun back-to-file ()
-  (interactive)
-  (haskell-interactive-switch-back))
-(add-hook 'haskell-interactive-mode-hook (lambda ()
-			                   (local-set-key (kbd "C-'") 'back-to-file)))
-;; end (39)
 ;; custom color for org TODO faces (40)
 (setq org-todo-keyword-faces
       '(("TODO" . "IndianRed1") ("WORK" . "azure1") ("DONE" . "SpringGreen1")))
@@ -199,15 +150,7 @@
 (setq-default dired-omit-files-p t)  
 (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))  
 ;; end (52)
-;; remap :q to kill buffer instead of closing emacs (53)
-(evil-ex-define-cmd "q" 'delete-window) 
-;; end (53)
-;; map :quit to close emacs (54)
-(evil-ex-define-cmd "quit" 'save-buffers-kill-terminal) 
 ;; end (54)
-;; change comment region style from /* */ to // (55)
-(add-hook 'c-mode-hook (lambda () (setq comment-start "//"
-                                        comment-end   ""))) 
 ;; end (55)
 ;; keybinding for opening diary (56)
 (defun open-diary-file ()
@@ -224,7 +167,7 @@
  '(default ((t (:inherit nil :extend nil :stipple nil :background "black" :foreground 
                          "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :s
                          lant normal :weight normal :height 158 :width normal :foundry "DAMA" :family "Ubuntu Mo
-no"))))
+-no")))) 
  '(dired-directory ((t (:foreground "cornflower blue"))))
  '(font-lock-builtin-face ((t (:foreground "gray"))))
  '(font-lock-comment-face ((t (:foreground "#7a7272"))))
@@ -244,47 +187,11 @@ no"))))
  '(vertical-border ((((type x) (background dark)) (:foreground "gray18")))))
 ;; end (57)
 ;; function to open file in top window (58)
-(defun open (file-name)
-  (interactive)
-  (split-down-and-switch)
-  (find-file-other-window file-name)) 
-;; end (58)
-;; remap o to open line below and indent (59)
-(defun my-open-below-line ()
-  (interactive)
-  (evil-open-below 1)
-  (c-indent-line-or-region)) 
-(evil-define-key 'normal c-mode-base-map (kbd "o") 'my-open-below-line)  
-;; end (59)
-;; remap O to open line above and indent (60)
-(defun my-open-above-line ()
-  (interactive)
-  (evil-open-above 1)
-  (c-indent-line-or-region)) 
-(evil-define-key 'normal c-mode-base-map (kbd "O") 'my-open-above-line)  
 ;; end (60)
 ;; hl-todo config (62)
-(setq hl-todo-keyword-faces
-      '(("TODO"   . "#FFFF00")
-        ("FIXME"  . "#FF0000")
-        ("DEBUG"  . "#A020F0")
-        ("GOTCHA" . "#FF4500")
-        ("NOTE"   . "#1E90FF"))) 
-;; use pdf-tools instead of doc-view (63)
-;; (pdf-tools-install) 
-;; (63)
-;; treat underscore as part of the word  (65)
-(require 'cc-mode) 
-(modify-syntax-entry ?_ "w" c-mode-syntax-table) 
-;; (65)
 ;; change color for comments (66)
 (set-face-foreground 'font-lock-comment-face "#7a7272") 
 ;; (66)
-;; shortcut to open classes directory in dired mode (67)
-(defun open-classes ()
-  (interactive)
-  (dired "/home/veera/classes/s23")) 
-(global-set-key (kbd "C-c l") 'open-classes) 
 ;; (67)
 ;; disable fringe mode by default (70)
 (fringe-mode 0)
@@ -296,7 +203,6 @@ no"))))
 (server-start)
 ;; (73)
 ;; vim like ex command for finding file (74)
-(evil-ex-define-cmd "f[ind]" 'ido-find-file) 
 ;; (74)
 ;; list workflow states in ORG mode (75)
 (setq org-todo-keywords
@@ -335,25 +241,8 @@ no"))))
   (let ((rdate (format-time-string "%b %d, %Y")))
     (insert rdate))) 
 ;; rust mode remap o to open line below and indent (59)
-(defun rust-open-below-line ()
-  (interactive)
-  (evil-open-below 1)
-  (rust-mode-indent-line))  
-(evil-define-key 'normal rust-mode-map (kbd "o") 'rust-open-below-line)  
-;; end (59)
-;; remap O to open line above and indent (60)
-(defun my-open-above-line ()
-  (interactive)
-  (evil-open-above 1)
-  (rust-mode-indent-line)) 
-(evil-define-key 'normal rust-mode-map (kbd "O") 'my-open-above-line)  
 ;; end (60)
 ;; quickly open projects directory (61)
-(defun open-projects-dir ()
-  (interactive)
-  (message "open-projects-dir")
-  (find-file "/home/veera/projects/"))
-(global-set-key (kbd "C-c C-p") 'open-projects-dir) 
 ;; end (61)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -382,15 +271,6 @@ no"))))
 (add-hook 'after-make-frame-functions 'my/disable-scroll-bars) 
 ;; (62)
 ;; (63) keybinding to run `(rust-compile)` aka cargo build
-(add-hook 'rust-mode-hook
-          (lambda ()
-            (local-set-key (kbd "<f5>") #'rustic-compile))) 
-(add-hook 'rust-mode-hook
-          (lambda ()
-            (local-set-key (kbd "<f6>") #'rustic-cargo-check))) 
-(add-hook 'rust-mode-hook
-          (lambda ()
-            (local-set-key (kbd "<f7>") #'rustic-cargo-test))) 
 ;; (63)
 ;; (64) install this package
 ;; (64)
@@ -400,29 +280,8 @@ no"))))
 ;; ease compilation
 ;; (require 'compile)
 ;; this means hitting the compile button always saves the buffer
-(setq mode-compile-always-save-buffer-p t)
-(setq compilation-ask-about-save nil)
-(setq compilation-window-height 12)
-(setq compilation-read-command nil)
-
-;; from enberg on #emacs
-(setq compilation-finish-function
-      (lambda (buf str)
-        (if (null (string-match ".*exited abnormally.*" str))
-            ;;no errors, make the compilation window go away in a few seconds
-            (progn
-              (run-at-time
-               "2 sec" nil 'delete-windows-on
-               (get-buffer-create "*compilation*"))
-              (message "No Compilation Errors!"))))) 
 ;; set org mode as initial buffer
 (setq initial-major-mode 'org-mode)
-(defun define-word ()
-  "Google search the definition for word near point."
-  (interactive)
-  (browse-url (concat "https://www.google.com/search?q=define+" (current-word)))) 
-(add-hook 'org-mode-hook
-          (lambda () (local-set-key (kbd "C-;") 'define-word))) 
 ;; dynamic headline numbering for all org files
 (setq org-startup-numerated t) 
 (put 'downcase-region 'disabled nil)
@@ -431,91 +290,10 @@ no"))))
 (add-hook 'prog-mode-hook 'display-line-numbers-mode) 
 ;; end (0)
 ;; rustic mode - a better rust-mode
-(use-package rustic
-  :ensure
-  :bind (:map rustic-mode-map
-              ("M-j" . lsp-ui-imenu)
-              ("M-?" . lsp-find-references)
-              ("C-c C-c l" . flycheck-list-errors)
-              ("C-c C-c a" . lsp-execute-code-action)
-              ("C-c C-c r" . lsp-rename)
-              ("C-c C-c q" . lsp-workspace-restart)
-              ("C-c C-c Q" . lsp-workspace-shutdown)
-              ("C-c C-c s" . lsp-rust-analyzer-status))
-  :config
-  ;; uncomment for less flashiness
-  ;; (setq lsp-eldoc-hook nil)
-  ;; (setq lsp-enable-symbol-highlighting nil)
-  ;; (setq lsp-signature-auto-activate nil)
-
-  ;; comment to disable rustfmt on save
-  ;; (setq rustic-format-on-save t)
-  (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook)) 
-
-(defun rk/rustic-mode-hook ()
-  ;; so that run C-c C-c C-r works without having to confirm, but don't try to
-  ;; save rust buffers that are not file visiting. Once
-  ;; https://github.com/brotzeit/rustic/issues/253 has been resolved this should
-  ;; no longer be necessary.
-  (when buffer-file-name
-    (setq-local buffer-save-without-query t))
-  (add-hook 'before-save-hook 'lsp-format-buffer nil t)) 
-
-(use-package lsp-mode
-  :ensure
-  :commands lsp
-  :custom
-  ;; what to use when checking on-save. "check" is default, I prefer clippy
-  (lsp-rust-analyzer-cargo-watch-command "clippy")
-  (lsp-eldoc-render-all t)
-  (lsp-idle-delay 0.6)
-  ;; enable / disable the hints as you prefer:
-  (lsp-inlay-hint-enable t)
-  (lsp-rust-analyzer-display-lifetime-elision-hints-enable "skip_trivial")
-  (lsp-rust-analyzer-display-chaining-hints t)
-  (lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names nil)
-  (lsp-rust-analyzer-display-closure-return-type-hints t)
-  (lsp-rust-analyzer-display-parameter-hints nil)
-  (lsp-rust-analyzer-display-reborrow-hints nil)
-  (lsp-ui-sideline-enable nil)
-  (lsp-ui-sideline-show-hover nil)
-  (lsp-ui-sideline-show-code-actions t)
-  (lsp-headerline-breadcrumb-enable nil)
-  (lsp-eldoc-enable-hover nil)
-  (lsp-signature-render-documentation nil)
-  (lsp-signature-auto-activate nil)
-  (lsp-completion-provider :none)
-  (lsp-modeline-code-actions-enable nil) 
-  :config
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode)) 
-
-(use-package lsp-ui
-  :ensure
-  :commands lsp-ui-mode
-  :custom
-  (lsp-ui-peek-always-show t)
-  (lsp-ui-sideline-show-hover t)
-  (lsp-ui-doc-enable nil)) 
-
-(with-eval-after-load 'lsp-mode
-  (add-hook 'lsp-mode-hook
-            (lambda ()
-              (remove-hook 'before-save-hook #'lsp-format-buffer t)
-              (remove-hook 'before-save-hook #'lsp-organize-imports t))
-            ))
-
-;; config for highlighting hyperlinks in blue
-;; (setq org-latex-packages-alist '("\\hypersetup{colorlinks=true,linkcolor=blue}"))
-
-
+;; (use-package rustic
+;;   :ensure t
+;; )
 ;; custom compile command to find make file in parent directory
-;; copied from https://emacs.stackexchange.com/questions/20954/compile-from-parent-directory-in-emacs
-(defun compile-project ()
-  (interactive)
-  (let* ((mk-dir (locate-dominating-file (buffer-file-name) "Makefile"))
-         (compile-command (concat "make -k -s -C " (shell-quote-argument mk-dir)))
-         (compilation-read-command nil))
-    (call-interactively 'compile))) 
 ;; install magit
 (use-package magit
   :ensure t
@@ -523,3 +301,17 @@ no"))))
   :config
   (setq magit-process-password-prompt-regexps '("^\r?\\(Enter \\)?[Pp]assphrase\\( for \\(RSA \\)?key '.*'\\)?: ?$" "^\\(Enter \\)?[Pp]assword\\( for '\\(https?://\\)?\\(?99:.*\\)'\\)?: ?$" "^.*'s password: ?$" "^Yubikey for .*: ?$" "^Enter PIN for .*: ?$")))
 
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-mode-line-format nil) ;; disable evil-mode state indicator
+  :config
+  (evil-mode 1)
+  (evil-set-initial-state 'term-mode 'emacs) ;; disable evil in terminals & eshell
+  (evil-set-initial-state 'eshell-mode 'emacs))
+
+(use-package org-bullets
+  :ensure t
+  :config
+  (org-bullets-mode 1)
+  :hook (org-mode . org-bullets-mode))
