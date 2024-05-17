@@ -16,11 +16,6 @@
 ;; set font to Ubuntu Mono with size = 16 (4)
 (set-frame-font "Ubuntu Mono 16" nil t) 
 
-;; automatically enable visual-line-mode and org-indent-mode (8)
-(with-eval-after-load 'org
-  (setq org-startup-indented t) ;; enables `org-indent-mode` by default
-  (add-hook 'org-mode-hook #'visual-line-mode))
-
 ;; Always do syntax highlighting 
 (global-font-lock-mode 1)
 ;; highlight parens  (15)
@@ -63,9 +58,6 @@
 ;; auto save on current file (32)
 (auto-save-visited-mode 1)
 
-(ido-mode 1)
-(setq ido-ignore-buffers '("^ " "*Completions*" "*Shell Command Output*" "*Messages*" "Terminal" "*Help*" "GNU Emacs" "*Backtrace*"))
-
 ;; kill all buffers, windows and open dired in current directory (38)
 (defun kill-buffers-open-plan ()
   (interactive)
@@ -82,7 +74,6 @@
 (setq inhibit-startup-message t)
 
 ;; display a detailed list of files in dired mode (45)
-(setq dired-listing-switches "-goh") 
 
 ;; I don't like tabs (50)
 (setq-default indent-tabs-mode nil) 
@@ -118,7 +109,7 @@
  '(vertical-border ((((type x) (background dark)) (:foreground "gray18")))))
 
 ;; change color for comments (66)
-(set-face-foreground 'font-lock-comment-face "#7a7272") 
+;; (set-face-foreground 'font-lock-comment-face "#7a7272") 
 
 ;; disable fringe mode by default (70)
 (fringe-mode 0)
@@ -128,10 +119,6 @@
 
 ;; always start emacs in server mode (73)
 (server-start)
-
-;; list workflow states in ORG mode (75)
-(setq org-todo-keywords
-      '((sequence "TODO" "WORK" "|" "DONE"))) 
 
 ;; set firefox as default browser (76)
 (setq browse-url-browser-function 'browse-url-firefox) 
@@ -155,36 +142,12 @@
       (replace-regexp-in-string "^-" "" tstr))
      (t tstr))))
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
- '(custom-safe-themes
-   '("e266d44fa3b75406394b979a3addc9b7f202348099cfde69e74ee6432f781336" default))
- '(moody-mode-line-height 27)
- '(org-export-backends '(ascii html icalendar latex md odt))
- '(org-export-with-section-numbers t)
- '(org-fontify-done-headline nil)
- '(org-fontify-whole-heading-line t)
- '(org-html-head-include-default-style nil)
- '(org-startup-folded t)
- '(package-selected-packages
-   '(rustic-mode magit ox-rss lsp-ui lsp-mode rustic tree-sitter-langs tree-sitter web-mode zig-mode ox-json mini-modeline geiser-racket typescript-mode racket-mode multi-line writeroom-mode use-package swift-mode shrink-path rust-mode pdf-tools paredit ox-reveal org-plus-contrib org-bullets moody modus-themes minions markdown-mode lox-mode latex-preview-pane kaolin-themes jq htmlize hl-todo haskell-mode evil all-the-icons)))
-
 ;; disable scroll bars in secondary frame opened using c-x-5-2
 (defun my/disable-scroll-bars (frame)
   (modify-frame-parameters frame
                            '((vertical-scroll-bars . nil)
                              (horizontal-scroll-bars . nil)))) 
 (add-hook 'after-make-frame-functions 'my/disable-scroll-bars) 
-
-;; set org mode as initial buffer
-(setq initial-major-mode 'org-mode)
-;; dynamic headline numbering for all org files
-(setq org-startup-numerated t) 
 
 ;; display line numbers and set color to line numbers (1)
 (add-hook 'prog-mode-hook 'display-line-numbers-mode) 
@@ -215,7 +178,7 @@
   :ensure t
   :config
   (setq x-underline-at-descent-line t
-        moody-mode-line-height 30)
+        moody-mode-line-height 27)
   (moody-replace-mode-line-buffer-identification)
   (moody-replace-vc-mode)) 
 
@@ -231,3 +194,34 @@
   :ensure t
   :init
   (setq rustic-lsp-client 'eglot)) 
+
+(use-package ido
+  :ensure t
+  :init
+  (setq ido-ignore-buffers '("^ " "*Completions*" "*Shell Command Output*"
+                             "*Messages*" "Terminal" "*Help*"
+                             "GNU Emacs" " *Backtrace*"))
+  :config
+  (ido-mode 1))
+
+(use-package dired
+  :config
+  (setq dired-listing-switches "-goh") )
+
+(use-package org
+  :init
+  (setq org-startup-indented t) ;; enables `org-indent-mode` by default
+  (setq org-startup-folded t)
+  (setq org-startup-numerated t) ;; dynamic headline numbering
+  (setq org-todo-keywords '((sequence "TODO" "WORK" "|" "DONE"))) 
+  (setq org-todo-keyword-faces
+        '(("TODO" . "IndianRed1") ("WORK" . "azure1") ("DONE" . "SpringGreen1")))
+  (setq org-export-backends '(ascii html latex md))
+  (setq org-export-with-section-numbers t)
+  (setq org-html-head-include-default-style nil)
+  (setq org-fontify-done-headline nil)
+  (setq org-fontify-whole-heading-line t)
+  :config
+  (setq initial-major-mode 'org-mode) ;; enable org mode for scratch buffer
+  :hook
+  (org-mode . visual-line-mode))
