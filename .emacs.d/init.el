@@ -21,9 +21,6 @@
   (setq org-startup-indented t) ;; enables `org-indent-mode` by default
   (add-hook 'org-mode-hook #'visual-line-mode))
 
-;; disable line numbers for org-mode (10)
-(add-hook 'org-mode-hook (lambda () (linum-mode 0)))
-
 ;; Always do syntax highlighting 
 (global-font-lock-mode 1)
 ;; highlight parens  (15)
@@ -31,8 +28,7 @@
       show-paren-style 'parenthesis)
 (show-paren-mode 1)
 
-(set-face-foreground 'region "black") 
-(set-face-background 'region "white") 
+(invert-face 'default)
 
 ;; display column number all the time (19)
 (setq column-number-mode t)
@@ -63,13 +59,6 @@
 
 (global-set-key (kbd "C-x 2") 'split-down-and-switch)
 (global-set-key (kbd "C-x 3") 'split-right-and-switch)
-
-;; add my credentials (30)
-(setq user-full-name "Veera Sivarajan"
-      user-mail-address "sveera.2001@gmail.com")
-
-;; custom frame title (31)
-(setq frame-title-format '("Emacs")) 
 
 ;; auto save on current file (32)
 (auto-save-visited-mode 1)
@@ -154,18 +143,17 @@
   (insert (get-date))) 
 
 ;; prettify branch name in mode line (81)
-;; (advice-add #'vc-git-mode-line-string :filter-return #'my-replace-git-status)
-;; (defun my-replace-git-status (tstr)
-;;   (let* ((tstr (replace-regexp-in-string "Git" "" tstr))
-;;          (first-char (substring tstr 0 1))
-;;          (rest-chars (substring tstr 1)))
-;;     (cond 
-;;      ((string= ":" first-char) ;;; Modified
-;;       (replace-regexp-in-string "^:" "" tstr))
-;;      ((string= "-" first-char) ;; No change
-;;       (replace-regexp-in-string "^-" "" tstr))
-;;      (t tstr))))
-;; (81)
+(advice-add #'vc-git-mode-line-string :filter-return #'my-replace-git-status)
+(defun my-replace-git-status (tstr)
+  (let* ((tstr (replace-regexp-in-string "Git" "" tstr))
+         (first-char (substring tstr 0 1))
+         (rest-chars (substring tstr 1)))
+    (cond 
+     ((string= ":" first-char) ;;; Modified
+      (replace-regexp-in-string "^:" "" tstr))
+     ((string= "-" first-char) ;; No change
+      (replace-regexp-in-string "^-" "" tstr))
+     (t tstr))))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -184,7 +172,7 @@
  '(org-html-head-include-default-style nil)
  '(org-startup-folded t)
  '(package-selected-packages
-   '(magit ox-rss lsp-ui lsp-mode rustic tree-sitter-langs tree-sitter web-mode zig-mode ox-json mini-modeline geiser-racket typescript-mode racket-mode multi-line writeroom-mode use-package swift-mode shrink-path rust-mode pdf-tools paredit ox-reveal org-plus-contrib org-bullets moody modus-themes minions markdown-mode lox-mode latex-preview-pane kaolin-themes jq htmlize hl-todo haskell-mode evil all-the-icons)))
+   '(rustic-mode magit ox-rss lsp-ui lsp-mode rustic tree-sitter-langs tree-sitter web-mode zig-mode ox-json mini-modeline geiser-racket typescript-mode racket-mode multi-line writeroom-mode use-package swift-mode shrink-path rust-mode pdf-tools paredit ox-reveal org-plus-contrib org-bullets moody modus-themes minions markdown-mode lox-mode latex-preview-pane kaolin-themes jq htmlize hl-todo haskell-mode evil all-the-icons)))
 
 ;; disable scroll bars in secondary frame opened using c-x-5-2
 (defun my/disable-scroll-bars (frame)
@@ -232,8 +220,14 @@
   (moody-replace-vc-mode)) 
 
 (use-package minions
+  :ensure t
   :custom
   (minions-mode-line-lighter "")
   (minions-mode-line-delimiters '("" .""))
   :config
   (minions-mode 1)) 
+
+(use-package rustic
+  :ensure t
+  :init
+  (setq rustic-lsp-client 'eglot)) 
