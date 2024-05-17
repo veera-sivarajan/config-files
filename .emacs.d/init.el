@@ -8,29 +8,6 @@
   (package-install 'use-package))
 (eval-when-compile (require 'use-package))
 
-;; disable menu bar, tool bar and scroll bar (3)
-(menu-bar-mode -1) ;; menu bar
-(tool-bar-mode -1) ;; tool bar
-(toggle-scroll-bar -1) ;; scroll bar
-
-;; set font to Ubuntu Mono with size = 16 (4)
-(set-frame-font "Ubuntu Mono 16" nil t) 
-
-;; Always do syntax highlighting 
-(global-font-lock-mode 1)
-;; highlight parens  (15)
-(setq show-paren-delay 0
-      show-paren-style 'parenthesis)
-(show-paren-mode 1)
-
-(invert-face 'default)
-
-;; display column number all the time (19)
-(setq column-number-mode t)
-
-;; set location for all backup files (21)
-(setq backup-directory-alist '(("." . "~/.emacs-backup/")))
-
 ;; quickly open emacs config file (22)
 (defun open-config-file ()
   (interactive)
@@ -55,9 +32,6 @@
 (global-set-key (kbd "C-x 2") 'split-down-and-switch)
 (global-set-key (kbd "C-x 3") 'split-right-and-switch)
 
-;; auto save on current file (32)
-(auto-save-visited-mode 1)
-
 ;; kill all buffers, windows and open dired in current directory (38)
 (defun kill-buffers-open-plan ()
   (interactive)
@@ -69,14 +43,6 @@
 ;; custom color for org TODO faces (40)
 (setq org-todo-keyword-faces
       '(("TODO" . "IndianRed1") ("WORK" . "azure1") ("DONE" . "SpringGreen1")))
-
-;; inhibit GNU Emacs buffer on startup (44)
-(setq inhibit-startup-message t)
-
-;; display a detailed list of files in dired mode (45)
-
-;; I don't like tabs (50)
-(setq-default indent-tabs-mode nil) 
 
 ;; keybinding for opening diary (56)
 (defun open-diary-file ()
@@ -108,21 +74,6 @@
  '(org-level-1 ((t (:foreground "light sky blue"))))
  '(vertical-border ((((type x) (background dark)) (:foreground "gray18")))))
 
-;; change color for comments (66)
-;; (set-face-foreground 'font-lock-comment-face "#7a7272") 
-
-;; disable fringe mode by default (70)
-(fringe-mode 0)
-
-;; disable blink cursor mode (71)
-(blink-cursor-mode 0) 
-
-;; always start emacs in server mode (73)
-(server-start)
-
-;; set firefox as default browser (76)
-(setq browse-url-browser-function 'browse-url-firefox) 
-
 ;; elisp function to insert date in a buffer in my preferred format (77)
 (defun get-date () (format-time-string "%b %d, %Y")) 
 (defun insert-date () 
@@ -148,9 +99,6 @@
                            '((vertical-scroll-bars . nil)
                              (horizontal-scroll-bars . nil)))) 
 (add-hook 'after-make-frame-functions 'my/disable-scroll-bars) 
-
-;; display line numbers and set color to line numbers (1)
-(add-hook 'prog-mode-hook 'display-line-numbers-mode) 
 
 ;; install magit
 (use-package magit
@@ -225,3 +173,27 @@
   (setq initial-major-mode 'org-mode) ;; enable org mode for scratch buffer
   :hook
   (org-mode . visual-line-mode))
+
+(use-package emacs
+  :config
+  (setq inhibit-startup-message t) ;; no splashy welcome message
+  (setq-default indent-tabs-mode nil) ;; tabs over spaces
+  (setq browse-url-browser-function 'browse-url-firefox) ;; open links in firefox
+  (setq show-paren-delay 0) ;; highlight paren
+  (setq show-paren-style 'parenthesis)
+  (setq column-number-mode t) ;; display column numbers
+  (setq backup-directory-alist '(("." . "~/.emacs-backup/"))) ;; backup files in
+
+  (invert-face 'default) ;; cool dark theme
+  (menu-bar-mode -1) ;; disable menu bar
+  (tool-bar-mode -1) ;; disable tool bar
+  (toggle-scroll-bar -1) ;; disable scroll bar
+  (fringe-mode 0) ;; disable fringe mode
+  (blink-cursor-mode 0)  ;; disable cursor blinking
+  (set-frame-font "Ubuntu Mono 16" nil t) ;; set default font
+
+  (global-font-lock-mode 1) ;; always do syntax highlighting
+  (auto-save-visited-mode 1) ;; auto save files
+  (server-start) ;; start emacs in server
+  (show-paren-mode 1)
+  (add-hook 'prog-mode-hook 'display-line-numbers-mode)) ;; display line numbers
