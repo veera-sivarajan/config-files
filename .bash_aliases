@@ -37,6 +37,8 @@ alias pap="cd /home/veera/books/papers/pl"
 alias casm="gcc -O0 -fverbose-asm -S"
 # quickly build stage 1 rust compiler while using existing std library
 alias rcb="./x build --stage 1 library --keep-stage-std 1"
+# shortened command for ~rustc +stage1~
+alias rs="rustc +stage1"
 # open a random wikipedia page on firefox
 alias wiki="firefox https://en.wikipedia.org/wiki/Special:Random"
 
