@@ -143,6 +143,11 @@
   :init
   (setq rustic-lsp-client 'eglot)) 
 
+(use-package eglot
+  :ensure t
+  :config
+  (setq eglot-stay-out-of '(flymake eldoc)))
+
 (use-package ido
   :ensure t
   :init
