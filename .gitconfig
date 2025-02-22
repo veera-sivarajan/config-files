@@ -4,13 +4,11 @@
 [core]
 	editor = vim
 [status]
-	showUntrackedFiles = all
+	showUntrackedFiles = no
 [init]
         defaultBranch = main
 [push]
         autosetupremote = true
-[merge]
-        conflictstyle = zdiff3
 [diff]
         algorithm = histogram
         submodule = log

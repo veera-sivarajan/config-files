@@ -1,4 +1,4 @@
-(setq package-archives 
+(setq package-archives
       '(("melpa" . "https://melpa.org/packages/")
         ("elpa" . "https://elpa.gnu.org/packages/")))
 
@@ -8,13 +8,13 @@
   (package-install 'use-package))
 (eval-when-compile (require 'use-package))
 
-;; quickly open emacs config file 
+;; quickly open emacs config file
 (defun open-config-file ()
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 (global-set-key (kbd "C-c e") 'open-config-file)
 
-;; split window and switch cursor 
+;; split window and switch cursor
 (defun split-down-and-switch ()
   "Split window horizontally, then switch to the new pane."
   (interactive)
@@ -32,25 +32,21 @@
 (global-set-key (kbd "C-x 2") 'split-down-and-switch)
 (global-set-key (kbd "C-x 3") 'split-right-and-switch)
 
-;; kill all buffers, windows and open dired in current directory 
+;; kill all buffers, windows and open dired in current directory
 (defun kill-buffers-open-plan ()
   (interactive)
   (mapcar 'kill-buffer (buffer-list))
-  (delete-other-windows) 
-  (find-file "/home/veera/classes/s23/plan.org")) 
-(global-set-key (kbd "<f8>") 'kill-buffers-open-plan) 
+  (delete-other-windows)
+  (find-file "/home/veera/oss.org"))
+(global-set-key (kbd "<f8>") 'kill-buffers-open-plan)
 
-;; custom color for org TODO faces 
-(setq org-todo-keyword-faces
-      '(("TODO" . "IndianRed1") ("WORK" . "azure1") ("DONE" . "SpringGreen1")))
-
-;; keybinding for opening diary 
+;; keybinding for opening diary
 (defun open-diary-file ()
   (interactive)
-  (find-file "~/diary.org")) 
-(global-set-key (kbd "C-c d") 'open-diary-file) 
+  (find-file "~/diary.org"))
+(global-set-key (kbd "C-c d") 'open-diary-file)
 
-;; all faces config 
+;; all faces config
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -74,19 +70,19 @@
  '(org-level-1 ((t (:foreground "light sky blue"))))
  '(vertical-border ((((type x) (background dark)) (:foreground "gray18")))))
 
-;; elisp function to insert date in a buffer in my preferred format 
-(defun get-date () (format-time-string "%b %d, %Y")) 
-(defun insert-date () 
-  (interactive) 
-  (insert (get-date))) 
+;; elisp function to insert date in a buffer in my preferred format
+(defun get-date () (format-time-string "%b %d, %Y"))
+(defun insert-date ()
+  (interactive)
+  (insert (get-date)))
 
-;; prettify branch name in mode line 
+;; prettify branch name in mode line
 (advice-add #'vc-git-mode-line-string :filter-return #'my-replace-git-status)
 (defun my-replace-git-status (tstr)
   (let* ((tstr (replace-regexp-in-string "Git" "" tstr))
          (first-char (substring tstr 0 1))
          (rest-chars (substring tstr 1)))
-    (cond 
+    (cond
      ((string= ":" first-char) ;;; Modified
       (replace-regexp-in-string "^:" "" tstr))
      ((string= "-" first-char) ;; No change
@@ -97,8 +93,8 @@
 (defun my/disable-scroll-bars (frame)
   (modify-frame-parameters frame
                            '((vertical-scroll-bars . nil)
-                             (horizontal-scroll-bars . nil)))) 
-(add-hook 'after-make-frame-functions 'my/disable-scroll-bars) 
+                             (horizontal-scroll-bars . nil))))
+(add-hook 'after-make-frame-functions 'my/disable-scroll-bars)
 
 ;; install magit
 (use-package magit
@@ -128,7 +124,7 @@
   (setq x-underline-at-descent-line t
         moody-mode-line-height 27)
   (moody-replace-mode-line-buffer-identification)
-  (moody-replace-vc-mode)) 
+  (moody-replace-vc-mode))
 
 (use-package minions
   :ensure t
@@ -136,17 +132,18 @@
   (minions-mode-line-lighter "")
   (minions-mode-line-delimiters '("" .""))
   :config
-  (minions-mode 1)) 
+  (minions-mode 1))
 
 (use-package rustic
   :ensure t
   :init
-  (setq rustic-lsp-client 'eglot)) 
+  (setq rustic-lsp-client 'eglot
+        ))
 
 (use-package eglot
   :ensure t
   :config
-  (setq eglot-stay-out-of '(flymake eldoc)))
+  (setq eglot-stay-out-of '(flymake eldoc flycheck)))
 
 (use-package ido
   :ensure t
@@ -159,16 +156,22 @@
 
 (use-package dired
   :config
-  (setq dired-listing-switches "-goh") )
+  (setq dired-listing-switches "-goh"))
+
+(use-package llvm-mode
+  :load-path "/home/veera/.emacs.d/llvm"
+  :mode ("\\.ll\\'" . llvm-mode)) 
 
 (use-package org
   :init
   (setq org-startup-indented t) ;; enables `org-indent-mode` by default
   (setq org-startup-folded t)
   (setq org-startup-numerated t) ;; dynamic headline numbering
-  (setq org-todo-keywords '((sequence "TODO" "WORK" "|" "DONE"))) 
+  (setq org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "|" "DONE")))
   (setq org-todo-keyword-faces
-        '(("TODO" . "IndianRed1") ("WORK" . "azure1") ("DONE" . "SpringGreen1")))
+        '(("TODO" . "#cd5c5c") ("IN-PROGRESS" . "#ff1493") ("DONE" . "#00ff7f")))
+  (setq org-tag-faces
+        '(("llvm" . "#ffff00") ("test" . "#00ff00") ("triage" . "#ffc125")))
   (setq org-export-backends '(ascii html latex md))
   (setq org-export-with-section-numbers t)
   (setq org-html-head-include-default-style nil)
@@ -202,3 +205,9 @@
   (server-start) ;; start emacs in server
   (show-paren-mode 1)
   (add-hook 'prog-mode-hook 'display-line-numbers-mode)) ;; display line numbers
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages '(llvm-mode rustic org-bullets moody minions magit evil)))

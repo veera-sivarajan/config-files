@@ -39,8 +39,11 @@ alias casm="gcc -O0 -fverbose-asm -S"
 alias rcb="./x build --stage 1 library --keep-stage-std 1"
 # shortened command for ~rustc +stage1~
 alias rs="rustc +stage1"
+alias rst="rustc +stage1 test.rs"
 # open a random wikipedia page on firefox
 alias wiki="firefox https://en.wikipedia.org/wiki/Special:Random"
+# connect to cfarm machine
+alias cfarm="ssh -i ~/.ssh/id_ed25519 veera@cfarm186.cfarm.net"
 
 # alias ld='ls -d */' # list all directories
 
@@ -181,7 +184,7 @@ function comc () {
 
 # download audio from Youtube using youtube-dl
 function dl {
-    python3 $(which youtube-dl) -U --extract-audio --audio-format mp3 $1
+    python3 $(which yt-dlp) --extract-audio --audio-format mp3 $1
 }
 
 # copy the rust code from clipboard into a file and execute it
